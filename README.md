@@ -1,6 +1,6 @@
-# CSE 30124 Intro to AI (Fall 2025) - Assignments
+# CSE 30124 Intro to AI - Assignments
 
-This is the [CSE-30124-SP25] homeworks repository for:
+This is the [CSE-30124] homeworks repository for:
 
 - **Name**:     Domer McDomerson
 - **NetID**:    dmcdomer
@@ -28,4 +28,4 @@ https://colab.research.google.com/github/nd-cse-30124-fa25/cse-30124-homeworks/b
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](
 https://colab.research.google.com/github/nd-cse-30124-fa25/cse-30124-homeworks/blob/main/homework05/homework05.ipynb)
 
-[CSE-30124-sp25]:   https://ai.williamtheisen.com
+[CSE-30124]:   https://30124.williamtheisen.com
