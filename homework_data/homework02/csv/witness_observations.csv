@@ -1,0 +1,97 @@
+suspect_name,witness_name,observation_index,time,location,activity,source_file
+Cesar Cervera,Tom,0,20:20 PM,Kitchen,Inflating balloons,suspect_statement_cesar_cervera.json
+Cesar Cervera,Pancho,0,19:20 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,Pancho,1,20:40 PM,Living Room,Looking in drawers,suspect_statement_cesar_cervera.json
+Cesar Cervera,Sophia,0,20:40 PM,Dining Room,Speaking in a high-pitched voice,suspect_statement_cesar_cervera.json
+Cesar Cervera,Sophia,1,21:00 PM,Dining Room,Speaking in a high-pitched voice,suspect_statement_cesar_cervera.json
+Cesar Cervera,Sophia,2,21:40 PM,Pantry,Looking in drawers,suspect_statement_cesar_cervera.json
+Cesar Cervera,Olivia,0,19:40 PM,Living Room,Inflating balloons,suspect_statement_cesar_cervera.json
+Cesar Cervera,Olivia,1,22:00 PM,Bathroom,Looking in drawers,suspect_statement_cesar_cervera.json
+Cesar Cervera,Sam,0,19:00 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,Sam,1,19:40 PM,Dining Room,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,Sam,2,20:20 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,Tyler,0,20:10 PM,Study,Looking in drawers,suspect_statement_cesar_cervera.json
+Cesar Cervera,Tyler,1,21:20 PM,Dining Room,Looking in drawers,suspect_statement_cesar_cervera.json
+Cesar Cervera,Tyler,2,21:50 PM,Kitchen,Ripping wippets,suspect_statement_cesar_cervera.json
+Jack Mangione,Tom,0,19:00 PM,Living Room,Opening letters,suspect_statement_jack_mangione.json
+Jack Mangione,Tom,1,19:20 PM,Study,Whittling a stick,suspect_statement_jack_mangione.json
+Jack Mangione,Tom,2,19:40 PM,Dining Room,Peeling an orange,suspect_statement_jack_mangione.json
+Jack Mangione,Tom,3,19:50 PM,Study,Reading a novel quietly,suspect_statement_jack_mangione.json
+Jack Mangione,Pancho,0,19:00 PM,Study,Returning to mingle with guests,suspect_statement_jack_mangione.json
+Jack Mangione,Pancho,1,19:10 PM,Dining Room,Returning to mingle with guests,suspect_statement_jack_mangione.json
+Jack Mangione,Sophia,0,21:50 PM,Dining Room,Opening letters,suspect_statement_jack_mangione.json
+Jack Mangione,Tyler,0,19:10 PM,Study,Opening letters,suspect_statement_jack_mangione.json
+Jack Mangione,Tyler,1,19:30 PM,Kitchen,Opening letters,suspect_statement_jack_mangione.json
+Jack Mangione,Tyler,2,20:20 PM,Study,Reading a novel quietly,suspect_statement_jack_mangione.json
+Jack Mangione,Tyler,3,20:40 PM,Study,Reading a novel quietly,suspect_statement_jack_mangione.json
+Jack Mangione,Tyler,4,21:10 PM,Study,Reading a novel quietly,suspect_statement_jack_mangione.json
+Jack Mangione,Tyler,5,22:10 PM,Living Room,Reading a novel quietly,suspect_statement_jack_mangione.json
+Olivia Zino,Tom,0,20:00 PM,Study,Polishing household items,suspect_statement_olivia_zino.json
+Olivia Zino,Tom,1,20:10 PM,Study,Inspecting a family heirloom,suspect_statement_olivia_zino.json
+Olivia Zino,Tom,2,20:30 PM,Living Room,Opening a safe,suspect_statement_olivia_zino.json
+Olivia Zino,Tom,3,21:00 PM,Kitchen,Opening a safe,suspect_statement_olivia_zino.json
+Olivia Zino,Tom,4,21:50 PM,Dining Room,Polishing household items,suspect_statement_olivia_zino.json
+Olivia Zino,Pancho,0,21:40 PM,Dining Room,Inspecting a family heirloom,suspect_statement_olivia_zino.json
+Olivia Zino,Pancho,1,22:10 PM,Dining Room,Washing up after handling items,suspect_statement_olivia_zino.json
+Olivia Zino,Sophia,0,21:50 PM,Kitchen,Polishing household items,suspect_statement_olivia_zino.json
+Olivia Zino,Olivia,0,19:40 PM,Living Room,Inspecting a family heirloom,suspect_statement_olivia_zino.json
+Olivia Zino,Olivia,1,19:50 PM,Dining Room,Polishing household items,suspect_statement_olivia_zino.json
+Olivia Zino,Olivia,2,20:40 PM,Kitchen,Inspecting a family heirloom,suspect_statement_olivia_zino.json
+Olivia Zino,Olivia,3,22:00 PM,Pantry,Talking about skeet shooting,suspect_statement_olivia_zino.json
+Olivia Zino,Sam,0,19:30 PM,Living Room,Polishing household items,suspect_statement_olivia_zino.json
+Olivia Zino,Sam,1,19:40 PM,Dining Room,Polishing household items,suspect_statement_olivia_zino.json
+Olivia Zino,Sam,2,20:20 PM,Bathroom,Polishing household items,suspect_statement_olivia_zino.json
+Olivia Zino,Sam,3,20:40 PM,Living Room,Washing up after handling items,suspect_statement_olivia_zino.json
+Olivia Zino,Sam,4,21:00 PM,Dining Room,Polishing household items,suspect_statement_olivia_zino.json
+Olivia Zino,Sam,5,21:50 PM,Kitchen,Inspecting a family heirloom,suspect_statement_olivia_zino.json
+Olivia Zino,Tyler,0,19:20 PM,Dining Room,Inspecting a family heirloom,suspect_statement_olivia_zino.json
+Olivia Zino,Tyler,1,19:40 PM,Living Room,Talking about skeet shooting,suspect_statement_olivia_zino.json
+Professor Bill,Tom,0,20:20 PM,Kitchen,Bragging about their Birkin,suspect_statement_professor_bill.json
+Professor Bill,Tom,1,20:40 PM,Kitchen,Chatting with guests,suspect_statement_professor_bill.json
+Professor Bill,Tom,2,20:50 PM,Pantry,Bringing in the shopping,suspect_statement_professor_bill.json
+Professor Bill,Pancho,0,19:00 PM,Kitchen,Retrieving items from storage,suspect_statement_professor_bill.json
+Professor Bill,Pancho,1,20:20 PM,Dining Room,Complaining about TSA going through their purse,suspect_statement_professor_bill.json
+Professor Bill,Pancho,2,21:30 PM,Bathroom,Bringing in the shopping,suspect_statement_professor_bill.json
+Professor Bill,Sophia,0,19:20 PM,Study,Bringing in the shopping,suspect_statement_professor_bill.json
+Professor Bill,Sophia,1,20:10 PM,Dining Room,Complaining about TSA going through their purse,suspect_statement_professor_bill.json
+Professor Bill,Sophia,2,21:50 PM,Bathroom,Bragging about their Birkin,suspect_statement_professor_bill.json
+Professor Bill,Olivia,0,20:00 PM,Study,Bragging about their Birkin,suspect_statement_professor_bill.json
+Professor Bill,Olivia,1,21:40 PM,Bathroom,Bringing in the shopping,suspect_statement_professor_bill.json
+Professor Bill,Sam,0,19:00 PM,Dining Room,Complaining about TSA going through their purse,suspect_statement_professor_bill.json
+Professor Bill,Sam,1,19:10 PM,Pantry,Retrieving items from storage,suspect_statement_professor_bill.json
+Professor Bill,Sam,2,19:30 PM,Study,Bringing in the shopping,suspect_statement_professor_bill.json
+Professor Bill,Sam,3,20:40 PM,Kitchen,Retrieving items from storage,suspect_statement_professor_bill.json
+Professor Bill,Tyler,0,19:00 PM,Dining Room,Bragging about their Birkin,suspect_statement_professor_bill.json
+Professor Bill,Tyler,1,20:10 PM,Living Room,Bringing in the shopping,suspect_statement_professor_bill.json
+Professor Bill,Tyler,2,21:20 PM,Bathroom,Bringing in the shopping,suspect_statement_professor_bill.json
+Sophia Noonan,Pancho,0,19:10 PM,Study,Observing guests from afar,suspect_statement_sophia_noonan.json
+Sophia Noonan,Pancho,1,20:20 PM,Bathroom,Reorganizing books and materials,suspect_statement_sophia_noonan.json
+Sophia Noonan,Pancho,2,20:40 PM,Living Room,Observing guests from afar,suspect_statement_sophia_noonan.json
+Sophia Noonan,Pancho,3,21:50 PM,Study,Tying decorative knots,suspect_statement_sophia_noonan.json
+Sophia Noonan,Pancho,4,22:00 PM,Study,Observing guests from afar,suspect_statement_sophia_noonan.json
+Sophia Noonan,Pancho,5,22:10 PM,Living Room,Observing guests from afar,suspect_statement_sophia_noonan.json
+Sophia Noonan,Sophia,0,20:30 PM,Study,Reorganizing books and materials,suspect_statement_sophia_noonan.json
+Sophia Noonan,Olivia,0,19:40 PM,Living Room,Taking her dog for a walk,suspect_statement_sophia_noonan.json
+Sophia Noonan,Olivia,1,20:40 PM,Dining Room,Observing guests from afar,suspect_statement_sophia_noonan.json
+Sophia Noonan,Sam,0,20:10 PM,Study,Raising a painting,suspect_statement_sophia_noonan.json
+Sophia Noonan,Sam,1,20:50 PM,Bathroom,Tying decorative knots,suspect_statement_sophia_noonan.json
+Sophia Noonan,Sam,2,21:20 PM,Bathroom,Raising a painting,suspect_statement_sophia_noonan.json
+Sophia Noonan,Tyler,0,20:20 PM,Living Room,Tying decorative knots,suspect_statement_sophia_noonan.json
+Sophia Noonan,Tyler,1,21:00 PM,Living Room,Observing guests from afar,suspect_statement_sophia_noonan.json
+Sophia Noonan,Tyler,2,21:10 PM,Living Room,Tying decorative knots,suspect_statement_sophia_noonan.json
+Tom Lohman,Tom,0,19:30 PM,Kitchen,Inspecting wine bottles,suspect_statement_tom_lohman.json
+Tom Lohman,Tom,1,20:20 PM,Kitchen,Rinsing a glass carefully,suspect_statement_tom_lohman.json
+Tom Lohman,Tom,2,21:20 PM,Dining Room,Rinsing a glass carefully,suspect_statement_tom_lohman.json
+Tom Lohman,Pancho,0,21:10 PM,Study,Inspecting wine bottles,suspect_statement_tom_lohman.json
+Tom Lohman,Pancho,1,21:20 PM,Dining Room,Serving drinks and chatting with guests,suspect_statement_tom_lohman.json
+Tom Lohman,Pancho,2,22:10 PM,Dining Room,Serving drinks and chatting with guests,suspect_statement_tom_lohman.json
+Tom Lohman,Sophia,0,21:10 PM,Dining Room,Swapping drinks unnoticed,suspect_statement_tom_lohman.json
+Tom Lohman,Sophia,1,21:20 PM,Kitchen,Inspecting wine bottles,suspect_statement_tom_lohman.json
+Tom Lohman,Olivia,0,19:50 PM,Kitchen,Swapping drinks unnoticed,suspect_statement_tom_lohman.json
+Tom Lohman,Olivia,1,20:30 PM,Living Room,Inspecting wine bottles,suspect_statement_tom_lohman.json
+Tom Lohman,Olivia,2,20:50 PM,Living Room,Rinsing a glass carefully,suspect_statement_tom_lohman.json
+Tom Lohman,Sam,0,20:00 PM,Dining Room,Rinsing a glass carefully,suspect_statement_tom_lohman.json
+Tom Lohman,Sam,1,21:30 PM,Study,Serving drinks and chatting with guests,suspect_statement_tom_lohman.json
+Tom Lohman,Sam,2,22:10 PM,Dining Room,Rinsing a glass carefully,suspect_statement_tom_lohman.json
+Tom Lohman,Tyler,0,19:10 PM,Living Room,Swapping drinks unnoticed,suspect_statement_tom_lohman.json
+Tom Lohman,Tyler,1,20:40 PM,Kitchen,Serving drinks and chatting with guests,suspect_statement_tom_lohman.json
