@@ -63,9 +63,8 @@ jobs:
                   shutil.copy2(css_file, target_css_dir / css_file.name)
 
           variants = {
-              "light": "gruvbox-light.css",
+              "light": "bluegold.css",
               "dark": "gruvbox-dark.css",
-              "bui": "bluegold.css",
           }
 
           html_files = [
