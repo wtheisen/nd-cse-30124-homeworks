@@ -103,6 +103,13 @@ jobs:
               html_path.unlink()
           PY
 
+      - name: Copy image assets into site
+        run: |
+          if [ -d "imgs" ]; then
+            mkdir -p site
+            cp -R imgs "site/"
+          fi
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
