@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]          # change to master if your default is master
     paths:
-      - '**/*.ipynb'
+      - '**/**/*.ipynb'
       - '.github/workflows/publish-notebooks.yml'
   workflow_dispatch:
 
@@ -20,7 +20,7 @@ concurrency:
 jobs:
   build:
     # prevent running on forks
-    if: ${{ github.repository == 'nd-cse-30124-fa25/cse-30124-homeworks' }}
+    if: ${{ github.repository == 'wtheisen/nd-cse-30124-homeworks' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -102,13 +102,20 @@ jobs:
               html_path.unlink()
           PY
 
+      - name: Copy image assets into site
+        run: |
+          if [ -d "imgs" ]; then
+            mkdir -p site
+            cp -R imgs "site/"
+          fi
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
 
   deploy:
-    if: ${{ github.repository == 'nd-cse-30124-fa25/cse-30124-homeworks' }}
+    if: ${{ github.repository == 'wtheisen/nd-cse-30124-homeworks' }}
     needs: build
     runs-on: ubuntu-latest
     environment:
