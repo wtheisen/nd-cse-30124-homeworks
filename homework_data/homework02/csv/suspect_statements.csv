@@ -1,0 +1,81 @@
+suspect_name,statement_index,time,location,activity,source_file
+Cesar Cervera,0,19:00 PM,Pantry,Looking in drawers,suspect_statement_cesar_cervera.json
+Cesar Cervera,1,19:10 PM,Kitchen,Speaking in a high-pitched voice,suspect_statement_cesar_cervera.json
+Cesar Cervera,2,19:20 PM,Pantry,Looking in drawers,suspect_statement_cesar_cervera.json
+Cesar Cervera,3,19:30 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,4,19:40 PM,Dining Room,Washing up after handling items,suspect_statement_cesar_cervera.json
+Cesar Cervera,5,19:50 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,6,20:00 PM,Pantry,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,7,20:10 PM,Kitchen,Inflating balloons,suspect_statement_cesar_cervera.json
+Cesar Cervera,8,20:20 PM,Pantry,Inflating balloons,suspect_statement_cesar_cervera.json
+Cesar Cervera,9,20:30 PM,Pantry,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,10,20:40 PM,Kitchen,Inflating balloons,suspect_statement_cesar_cervera.json
+Cesar Cervera,11,20:50 PM,Pantry,Speaking in a high-pitched voice,suspect_statement_cesar_cervera.json
+Cesar Cervera,12,21:00 PM,Kitchen,Looking in drawers,suspect_statement_cesar_cervera.json
+Cesar Cervera,13,21:10 PM,Pantry,Ripping wippets,suspect_statement_cesar_cervera.json
+Cesar Cervera,14,21:20 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,15,21:30 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,16,21:40 PM,Pantry,Complaining about TSA going through their purse,suspect_statement_cesar_cervera.json
+Cesar Cervera,17,21:50 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Cesar Cervera,18,22:00 PM,Pantry,Speaking in a high-pitched voice,suspect_statement_cesar_cervera.json
+Cesar Cervera,19,22:10 PM,Kitchen,Reading warning labels,suspect_statement_cesar_cervera.json
+Professor Bill,0,19:00 PM,Dining Room,Talking about skeet shooting,suspect_statement_professor_bill.json
+Professor Bill,1,19:10 PM,Kitchen,Tying decorative knots,suspect_statement_professor_bill.json
+Professor Bill,2,19:20 PM,Dining Room,Inflating balloons,suspect_statement_professor_bill.json
+Professor Bill,3,19:30 PM,Dining Room,Complaining about TSA going through their purse,suspect_statement_professor_bill.json
+Professor Bill,4,19:40 PM,Dining Room,Looking in drawers,suspect_statement_professor_bill.json
+Professor Bill,5,19:50 PM,Kitchen,Ripping wippets,suspect_statement_professor_bill.json
+Professor Bill,6,20:00 PM,Dining Room,Chatting with guests,suspect_statement_professor_bill.json
+Professor Bill,7,20:10 PM,Dining Room,Whittling a stick,suspect_statement_professor_bill.json
+Professor Bill,8,20:20 PM,Kitchen,Bringing in the shopping,suspect_statement_professor_bill.json
+Professor Bill,9,20:30 PM,Dining Room,Bragging about their Birkin,suspect_statement_professor_bill.json
+Professor Bill,10,20:40 PM,Kitchen,Polishing household items,suspect_statement_professor_bill.json
+Professor Bill,11,20:50 PM,Kitchen,Ripping wippets,suspect_statement_professor_bill.json
+Professor Bill,12,21:00 PM,Dining Room,Complaining about TSA going through their purse,suspect_statement_professor_bill.json
+Professor Bill,13,21:10 PM,Living Room,Tying decorative knots,suspect_statement_professor_bill.json
+Professor Bill,14,21:20 PM,Bathroom,Serving drinks and chatting with guests,suspect_statement_professor_bill.json
+Professor Bill,15,21:30 PM,Bathroom,Bragging about their Birkin,suspect_statement_professor_bill.json
+Professor Bill,16,21:40 PM,Bathroom,Peeling an orange,suspect_statement_professor_bill.json
+Professor Bill,17,21:50 PM,Living Room,Chatting with guests,suspect_statement_professor_bill.json
+Professor Bill,18,22:00 PM,Study,Complaining about TSA going through their purse,suspect_statement_professor_bill.json
+Professor Bill,19,22:10 PM,Study,Peeling an orange,suspect_statement_professor_bill.json
+Sophia Noonan,0,19:00 PM,Living Room,Inspecting wine bottles,suspect_statement_sophia_noonan.json
+Sophia Noonan,1,19:10 PM,Study,Taking her dog for a walk,suspect_statement_sophia_noonan.json
+Sophia Noonan,2,19:20 PM,Living Room,Reading a novel quietly,suspect_statement_sophia_noonan.json
+Sophia Noonan,3,19:30 PM,Study,Tying decorative knots,suspect_statement_sophia_noonan.json
+Sophia Noonan,4,19:40 PM,Living Room,Observing guests from afar,suspect_statement_sophia_noonan.json
+Sophia Noonan,5,19:50 PM,Living Room,Reading a novel quietly,suspect_statement_sophia_noonan.json
+Sophia Noonan,6,20:00 PM,Study,Rinsing a glass carefully,suspect_statement_sophia_noonan.json
+Sophia Noonan,7,20:10 PM,Living Room,Observing guests from afar,suspect_statement_sophia_noonan.json
+Sophia Noonan,8,20:20 PM,Living Room,Taking her dog for a walk,suspect_statement_sophia_noonan.json
+Sophia Noonan,9,20:30 PM,Study,Raising a painting,suspect_statement_sophia_noonan.json
+Sophia Noonan,10,20:40 PM,Living Room,Inflating balloons,suspect_statement_sophia_noonan.json
+Sophia Noonan,11,20:50 PM,Bathroom,Taking her dog for a walk,suspect_statement_sophia_noonan.json
+Sophia Noonan,12,21:00 PM,Living Room,Raising a painting,suspect_statement_sophia_noonan.json
+Sophia Noonan,13,21:10 PM,Bathroom,Tampering with drinks,suspect_statement_sophia_noonan.json
+Sophia Noonan,14,21:20 PM,Bathroom,Reorganizing books and materials,suspect_statement_sophia_noonan.json
+Sophia Noonan,15,21:30 PM,Living Room,Raising a painting,suspect_statement_sophia_noonan.json
+Sophia Noonan,16,21:40 PM,Study,Raising a painting,suspect_statement_sophia_noonan.json
+Sophia Noonan,17,21:50 PM,Study,Bringing in the shopping,suspect_statement_sophia_noonan.json
+Sophia Noonan,18,22:00 PM,Study,Raising a painting,suspect_statement_sophia_noonan.json
+Sophia Noonan,19,22:10 PM,Study,Chatting with guests,suspect_statement_sophia_noonan.json
+Tom Lohman,0,19:00 PM,Dining Room,Returning to mingle with guests,suspect_statement_tom_lohman.json
+Tom Lohman,1,19:10 PM,Study,Serving drinks and chatting with guests,suspect_statement_tom_lohman.json
+Tom Lohman,2,19:20 PM,Dining Room,Swapping drinks unnoticed,suspect_statement_tom_lohman.json
+Tom Lohman,3,19:30 PM,Kitchen,Swapping drinks unnoticed,suspect_statement_tom_lohman.json
+Tom Lohman,4,19:40 PM,Pantry,Taking her dog for a walk,suspect_statement_tom_lohman.json
+Tom Lohman,5,19:50 PM,Kitchen,Rinsing a glass carefully,suspect_statement_tom_lohman.json
+Tom Lohman,6,20:00 PM,Dining Room,Bragging about their Birkin,suspect_statement_tom_lohman.json
+Tom Lohman,7,20:10 PM,Kitchen,Serving drinks and chatting with guests,suspect_statement_tom_lohman.json
+Tom Lohman,8,20:20 PM,Dining Room,Inflating balloons,suspect_statement_tom_lohman.json
+Tom Lohman,9,20:30 PM,Dining Room,Inspecting wine bottles,suspect_statement_tom_lohman.json
+Tom Lohman,10,20:40 PM,Living Room,Rinsing a glass carefully,suspect_statement_tom_lohman.json
+Tom Lohman,11,20:50 PM,Living Room,Inspecting wine bottles,suspect_statement_tom_lohman.json
+Tom Lohman,12,21:00 PM,Dining Room,Serving drinks and chatting with guests,suspect_statement_tom_lohman.json
+Tom Lohman,13,21:10 PM,Living Room,Bringing in the shopping,suspect_statement_tom_lohman.json
+Tom Lohman,14,21:20 PM,Dining Room,Ripping wippets,suspect_statement_tom_lohman.json
+Tom Lohman,15,21:30 PM,Dining Room,Retrieving items from storage,suspect_statement_tom_lohman.json
+Tom Lohman,16,21:40 PM,Dining Room,Swapping drinks unnoticed,suspect_statement_tom_lohman.json
+Tom Lohman,17,21:50 PM,Dining Room,Tampering with drinks,suspect_statement_tom_lohman.json
+Tom Lohman,18,22:00 PM,Kitchen,Inspecting a family heirloom,suspect_statement_tom_lohman.json
+Tom Lohman,19,22:10 PM,Dining Room,Serving drinks and chatting with guests,suspect_statement_tom_lohman.json

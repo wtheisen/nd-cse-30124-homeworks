@@ -1,0 +1,121 @@
+suspect_name,gps_index,time,location,signal_strength,source_file
+Cesar Cervera,0,19:00 PM,Study,0.5019343834767135,suspect_statement_cesar_cervera.json
+Cesar Cervera,1,19:10 PM,Dining Room,0.17514508402309023,suspect_statement_cesar_cervera.json
+Cesar Cervera,2,19:20 PM,Kitchen,0.5265094771971986,suspect_statement_cesar_cervera.json
+Cesar Cervera,3,19:30 PM,Dining Room,0.07742232439253414,suspect_statement_cesar_cervera.json
+Cesar Cervera,4,19:40 PM,Study,0.42155883609297545,suspect_statement_cesar_cervera.json
+Cesar Cervera,5,19:50 PM,Living Room,0.47110580253662043,suspect_statement_cesar_cervera.json
+Cesar Cervera,6,20:00 PM,Bathroom,0.20194628495333922,suspect_statement_cesar_cervera.json
+Cesar Cervera,7,20:10 PM,Dining Room,0.1531782480459722,suspect_statement_cesar_cervera.json
+Cesar Cervera,8,20:20 PM,Kitchen,0.43187891981513943,suspect_statement_cesar_cervera.json
+Cesar Cervera,9,20:30 PM,Kitchen,0.1917570147859218,suspect_statement_cesar_cervera.json
+Cesar Cervera,10,20:40 PM,Kitchen,0.726943649602224,suspect_statement_cesar_cervera.json
+Cesar Cervera,11,20:50 PM,Pantry,0.794022473156495,suspect_statement_cesar_cervera.json
+Cesar Cervera,12,21:00 PM,Kitchen,0.74370541549747,suspect_statement_cesar_cervera.json
+Cesar Cervera,13,21:10 PM,Kitchen,0.3539205754420691,suspect_statement_cesar_cervera.json
+Cesar Cervera,14,21:20 PM,Dining Room,0.34593226811708633,suspect_statement_cesar_cervera.json
+Cesar Cervera,15,21:30 PM,Dining Room,0.22962118939359633,suspect_statement_cesar_cervera.json
+Cesar Cervera,16,21:40 PM,Kitchen,0.20334156832259764,suspect_statement_cesar_cervera.json
+Cesar Cervera,17,21:50 PM,Kitchen,0.8491626299400014,suspect_statement_cesar_cervera.json
+Cesar Cervera,18,22:00 PM,Kitchen,0.29384166415806406,suspect_statement_cesar_cervera.json
+Cesar Cervera,19,22:10 PM,Kitchen,0.8729667973176013,suspect_statement_cesar_cervera.json
+Jack Mangione,0,19:00 PM,Study,0.6478570020507927,suspect_statement_jack_mangione.json
+Jack Mangione,1,19:10 PM,Study,0.8089677851627178,suspect_statement_jack_mangione.json
+Jack Mangione,2,19:20 PM,Study,0.5851776016606303,suspect_statement_jack_mangione.json
+Jack Mangione,3,19:30 PM,Study,0.5521350908953444,suspect_statement_jack_mangione.json
+Jack Mangione,4,19:40 PM,Study,0.6350934032389165,suspect_statement_jack_mangione.json
+Jack Mangione,5,19:50 PM,Study,0.5294186023508695,suspect_statement_jack_mangione.json
+Jack Mangione,6,20:00 PM,Bathroom,0.1422490459849999,suspect_statement_jack_mangione.json
+Jack Mangione,7,20:10 PM,Dining Room,0.2888632847578089,suspect_statement_jack_mangione.json
+Jack Mangione,8,20:20 PM,Dining Room,0.19050674188572478,suspect_statement_jack_mangione.json
+Jack Mangione,9,20:30 PM,Living Room,0.2092541571648661,suspect_statement_jack_mangione.json
+Jack Mangione,10,20:40 PM,Study,0.727621573577063,suspect_statement_jack_mangione.json
+Jack Mangione,11,20:50 PM,Study,0.8637310478119576,suspect_statement_jack_mangione.json
+Jack Mangione,12,21:00 PM,Study,0.7998181566554086,suspect_statement_jack_mangione.json
+Jack Mangione,13,21:10 PM,Living Room,0.7623631527471959,suspect_statement_jack_mangione.json
+Jack Mangione,14,21:20 PM,Living Room,0.3532526810653981,suspect_statement_jack_mangione.json
+Jack Mangione,15,21:30 PM,Bathroom,0.7195636160883162,suspect_statement_jack_mangione.json
+Jack Mangione,16,21:40 PM,Living Room,0.35810277695947856,suspect_statement_jack_mangione.json
+Jack Mangione,17,21:50 PM,Living Room,0.8853229518679411,suspect_statement_jack_mangione.json
+Jack Mangione,18,22:00 PM,Bathroom,0.49832377466646277,suspect_statement_jack_mangione.json
+Jack Mangione,19,22:10 PM,Bathroom,0.7787458197874847,suspect_statement_jack_mangione.json
+Olivia Zino,0,19:00 PM,Dining Room,0.07923651457074642,suspect_statement_olivia_zino.json
+Olivia Zino,1,19:10 PM,Dining Room,0.16942954824318723,suspect_statement_olivia_zino.json
+Olivia Zino,2,19:20 PM,Living Room,0.6620853881393566,suspect_statement_olivia_zino.json
+Olivia Zino,3,19:30 PM,Living Room,0.7904453244396781,suspect_statement_olivia_zino.json
+Olivia Zino,4,19:40 PM,Living Room,0.6410304374604908,suspect_statement_olivia_zino.json
+Olivia Zino,5,19:50 PM,Living Room,0.8454571212911677,suspect_statement_olivia_zino.json
+Olivia Zino,6,20:00 PM,Living Room,0.3599038047764665,suspect_statement_olivia_zino.json
+Olivia Zino,7,20:10 PM,Study,0.2580447807603187,suspect_statement_olivia_zino.json
+Olivia Zino,8,20:20 PM,Bathroom,0.697345140500129,suspect_statement_olivia_zino.json
+Olivia Zino,9,20:30 PM,Living Room,0.8875229276073228,suspect_statement_olivia_zino.json
+Olivia Zino,10,20:40 PM,Living Room,0.24745576520503107,suspect_statement_olivia_zino.json
+Olivia Zino,11,20:50 PM,Dining Room,0.7665130398537504,suspect_statement_olivia_zino.json
+Olivia Zino,12,21:00 PM,Dining Room,0.18775195560672292,suspect_statement_olivia_zino.json
+Olivia Zino,13,21:10 PM,Pantry,0.2302072203522875,suspect_statement_olivia_zino.json
+Olivia Zino,14,21:20 PM,Kitchen,0.845455211331799,suspect_statement_olivia_zino.json
+Olivia Zino,15,21:30 PM,Pantry,0.7647211730842824,suspect_statement_olivia_zino.json
+Olivia Zino,16,21:40 PM,Kitchen,0.6578792407194675,suspect_statement_olivia_zino.json
+Olivia Zino,17,21:50 PM,Dining Room,0.17225758466202537,suspect_statement_olivia_zino.json
+Olivia Zino,18,22:00 PM,Kitchen,0.200684156828553,suspect_statement_olivia_zino.json
+Olivia Zino,19,22:10 PM,Kitchen,0.5673223383251964,suspect_statement_olivia_zino.json
+Professor Bill,0,19:00 PM,Study,0.2925473756508447,suspect_statement_professor_bill.json
+Professor Bill,1,19:10 PM,Living Room,0.1320898797799869,suspect_statement_professor_bill.json
+Professor Bill,2,19:20 PM,Dining Room,0.8901369883242616,suspect_statement_professor_bill.json
+Professor Bill,3,19:30 PM,Dining Room,0.6903433462445621,suspect_statement_professor_bill.json
+Professor Bill,4,19:40 PM,Dining Room,0.7384304497900133,suspect_statement_professor_bill.json
+Professor Bill,5,19:50 PM,Kitchen,0.8434739197133859,suspect_statement_professor_bill.json
+Professor Bill,6,20:00 PM,Dining Room,0.6628017886568691,suspect_statement_professor_bill.json
+Professor Bill,7,20:10 PM,Dining Room,0.8748682819113038,suspect_statement_professor_bill.json
+Professor Bill,8,20:20 PM,Dining Room,0.3519232621350941,suspect_statement_professor_bill.json
+Professor Bill,9,20:30 PM,Study,0.28944429475544825,suspect_statement_professor_bill.json
+Professor Bill,10,20:40 PM,Kitchen,0.6235944709311374,suspect_statement_professor_bill.json
+Professor Bill,11,20:50 PM,Kitchen,0.6554493099007376,suspect_statement_professor_bill.json
+Professor Bill,12,21:00 PM,Dining Room,0.7340510996544133,suspect_statement_professor_bill.json
+Professor Bill,13,21:10 PM,Dining Room,0.0919888842305048,suspect_statement_professor_bill.json
+Professor Bill,14,21:20 PM,Bathroom,0.7207968508966421,suspect_statement_professor_bill.json
+Professor Bill,15,21:30 PM,Living Room,0.5256030810790565,suspect_statement_professor_bill.json
+Professor Bill,16,21:40 PM,Bathroom,0.5107120617971657,suspect_statement_professor_bill.json
+Professor Bill,17,21:50 PM,Living Room,0.6905896343144592,suspect_statement_professor_bill.json
+Professor Bill,18,22:00 PM,Study,0.6847992082965956,suspect_statement_professor_bill.json
+Professor Bill,19,22:10 PM,Living Room,0.34856085557976735,suspect_statement_professor_bill.json
+Sophia Noonan,0,19:00 PM,Living Room,0.7061572526848275,suspect_statement_sophia_noonan.json
+Sophia Noonan,1,19:10 PM,Study,0.7271256595668497,suspect_statement_sophia_noonan.json
+Sophia Noonan,2,19:20 PM,Bathroom,0.3265221061749208,suspect_statement_sophia_noonan.json
+Sophia Noonan,3,19:30 PM,Study,0.6671112362236508,suspect_statement_sophia_noonan.json
+Sophia Noonan,4,19:40 PM,Living Room,0.6576134642933085,suspect_statement_sophia_noonan.json
+Sophia Noonan,5,19:50 PM,Living Room,0.949067258940988,suspect_statement_sophia_noonan.json
+Sophia Noonan,6,20:00 PM,Living Room,0.3063495485932132,suspect_statement_sophia_noonan.json
+Sophia Noonan,7,20:10 PM,Living Room,0.8553873355711056,suspect_statement_sophia_noonan.json
+Sophia Noonan,8,20:20 PM,Bathroom,0.42856643919044884,suspect_statement_sophia_noonan.json
+Sophia Noonan,9,20:30 PM,Study,0.6459111547225982,suspect_statement_sophia_noonan.json
+Sophia Noonan,10,20:40 PM,Living Room,0.7572619813880849,suspect_statement_sophia_noonan.json
+Sophia Noonan,11,20:50 PM,Kitchen,0.11941928633324836,suspect_statement_sophia_noonan.json
+Sophia Noonan,12,21:00 PM,Study,0.007622370225029967,suspect_statement_sophia_noonan.json
+Sophia Noonan,13,21:10 PM,Living Room,0.27714315608064766,suspect_statement_sophia_noonan.json
+Sophia Noonan,14,21:20 PM,Living Room,0.22499845201396323,suspect_statement_sophia_noonan.json
+Sophia Noonan,15,21:30 PM,Living Room,0.8525305636607308,suspect_statement_sophia_noonan.json
+Sophia Noonan,16,21:40 PM,Living Room,0.0786350635334992,suspect_statement_sophia_noonan.json
+Sophia Noonan,17,21:50 PM,Living Room,0.20448442591389374,suspect_statement_sophia_noonan.json
+Sophia Noonan,18,22:00 PM,Living Room,0.4021599573696566,suspect_statement_sophia_noonan.json
+Sophia Noonan,19,22:10 PM,Living Room,0.23761428910444812,suspect_statement_sophia_noonan.json
+Tom Lohman,0,19:00 PM,Dining Room,0.7710413715014253,suspect_statement_tom_lohman.json
+Tom Lohman,1,19:10 PM,Dining Room,0.413164650649143,suspect_statement_tom_lohman.json
+Tom Lohman,2,19:20 PM,Dining Room,0.6604331248945833,suspect_statement_tom_lohman.json
+Tom Lohman,3,19:30 PM,Bathroom,0.36615491257060717,suspect_statement_tom_lohman.json
+Tom Lohman,4,19:40 PM,Kitchen,0.47534768986977594,suspect_statement_tom_lohman.json
+Tom Lohman,5,19:50 PM,Kitchen,0.7591348771355921,suspect_statement_tom_lohman.json
+Tom Lohman,6,20:00 PM,Dining Room,0.3212736038097527,suspect_statement_tom_lohman.json
+Tom Lohman,7,20:10 PM,Living Room,0.39397761033868967,suspect_statement_tom_lohman.json
+Tom Lohman,8,20:20 PM,Dining Room,0.7600581356661915,suspect_statement_tom_lohman.json
+Tom Lohman,9,20:30 PM,Living Room,0.18792718594370644,suspect_statement_tom_lohman.json
+Tom Lohman,10,20:40 PM,Living Room,0.7439252192126227,suspect_statement_tom_lohman.json
+Tom Lohman,11,20:50 PM,Living Room,0.7751009242824259,suspect_statement_tom_lohman.json
+Tom Lohman,12,21:00 PM,Bathroom,0.09032844290479942,suspect_statement_tom_lohman.json
+Tom Lohman,13,21:10 PM,Bathroom,0.4472129282346287,suspect_statement_tom_lohman.json
+Tom Lohman,14,21:20 PM,Dining Room,0.8388371379229318,suspect_statement_tom_lohman.json
+Tom Lohman,15,21:30 PM,Dining Room,0.6489283251075959,suspect_statement_tom_lohman.json
+Tom Lohman,16,21:40 PM,Dining Room,0.6972806541393447,suspect_statement_tom_lohman.json
+Tom Lohman,17,21:50 PM,Dining Room,0.48776364491737934,suspect_statement_tom_lohman.json
+Tom Lohman,18,22:00 PM,Dining Room,0.3629078186137351,suspect_statement_tom_lohman.json
+Tom Lohman,19,22:10 PM,Kitchen,0.37694790141169704,suspect_statement_tom_lohman.json
