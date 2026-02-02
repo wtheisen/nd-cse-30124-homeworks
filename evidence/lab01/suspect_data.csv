@@ -1,0 +1,81 @@
+suspect_name,weapon_mentions,total_lying_prob,good_suspect,statement_1,statement_2,statement_3,statement_4,statement_5,statement_6,statement_7,statement_8,statement_9,statement_10,lying_prob_1,lying_prob_2,lying_prob_3,lying_prob_4,lying_prob_5,lying_prob_6,lying_prob_7,lying_prob_8,lying_prob_9,lying_prob_10
+Olivia Zino,,,,I arrived late to the party,Someone was carrying a bag upstairs,I heard arguing in the study,The buffet in the kitchen looked incomplete,I stayed near the entrance,Someone mentioned a knife was missing,I saw the host alive at ten,The decorations were strange,I left with friends,Nothing seemed wrong to me,0.5,0.52,0.49,0.51,0.5,0.52,0.49,0.51,0.5,0.51
+Claudia Huck,3.0,0.77,1.0,,,,,,,,,,,,,,,,,,,,
+Everton Albuquerque de Oliveira,4.0,0.85,1.0,,,,,,,,,,,,,,,,,,,,
+Cameron Rohlfsen,,,,I arrived alone,I mingled with guests,The host mentioned a knife collection,I stayed in common areas,I left at midnight,Nothing caught my eye,The party was enjoyable,Music was loud,Food was great,I had a nice time,0.54,0.53,0.55,0.54,0.53,0.55,0.54,0.53,0.54,0.55
+Samuel Gisiner,3.0,0.86,1.0,,,,,,,,,,,,,,,,,,,,
+Elijah Jones,0.0,0.2,0.0,,,,,,,,,,,,,,,,,,,,
+Kevin Fox,4.0,0.79,1.0,,,,,,,,,,,,,,,,,,,,
+Ciaran Heaney,5.0,0.89,1.0,,,,,,,,,,,,,,,,,,,,
+Jacob Dording,3.0,0.75,1.0,,,,,,,,,,,,,,,,,,,,
+Liam Sagucio,,,,I was invited last minute,I talked about the knife exhibit at the museum,I did not know many people,The host was welcoming,I stayed near the food,Nothing seemed unusual,The house was impressive,Music was nice,Food was delicious,I had an okay time,0.53,0.55,0.54,0.53,0.54,0.55,0.53,0.54,0.55,0.54
+James Carter,5.0,0.92,1.0,,,,,,,,,,,,,,,,,,,,
+Zenidene El Farissi,2.0,0.68,1.0,,,,,,,,,,,,,,,,,,,,
+John Whalen,3.0,0.55,0.0,,,,,,,,,,,,,,,,,,,,
+Gedeon Kebede,1.0,0.26,0.0,,,,,,,,,,,,,,,,,,,,
+Olivia Pierret,,,,I was with friends all night,We stayed together the whole time,The host greeted us warmly,The house was beautiful,I did not wander around,We left together,Nothing unusual happened,The evening was pleasant,Food was delicious,I enjoyed myself,0.18,0.14,0.21,0.16,0.19,0.12,0.23,0.15,0.2,0.17
+Julia Klein,0.0,0.13,0.0,,,,,,,,,,,,,,,,,,,,
+Ryan Putka,,,,I know the host well,We talked for a while,The party was well organized,I stayed in the main room,I left before it ended,Everything was normal,The guests were friendly,Music was good,Drinks were fine,Nothing to report,0.21,0.17,0.14,0.23,0.16,0.19,0.12,0.2,0.15,0.18
+Samar Vinod,2.0,0.48,0.0,,,,,,,,,,,,,,,,,,,,
+Logan St Pierre,,,,I am an old friend,We reminisced all night,The host was nostalgic,I stayed in the living room,I left reluctantly,Everything was wonderful,The memories were sweet,Food reminded me of old times,Music was from our era,I loved it,0.22,0.17,0.2,0.15,0.18,0.13,0.21,0.16,0.19,0.14
+Sophia Stuber,4.0,0.66,1.0,,,,,,,,,,,,,,,,,,,,
+Biruk Molla,1.0,0.54,1.0,,,,,,,,,,,,,,,,,,,,
+David DiPietro,0.0,0.15,0.0,,,,,,,,,,,,,,,,,,,,
+Jack Mangione,,,,I stayed in the study reading,The knife on the desk was ornate,Someone talked about poison plants,I saw rope in the closet,A bag was left unattended,The gas lamp was flickering,I heard gun references,The host was busy,I left early,Nothing caught my attention,0.79,0.85,0.73,0.81,0.77,0.84,0.69,0.78,0.82,0.76
+Katherine Comito,0.0,0.18,0.0,,,,,,,,,,,,,,,,,,,,
+Aaron Wang,2.0,0.56,1.0,,,,,,,,,,,,,,,,,,,,
+Quinn Kettler,2.0,0.72,1.0,,,,,,,,,,,,,,,,,,,,
+Tom Lohman,,,,I was outside most of the time,The poison ivy in the garden was concerning,I saw someone with a gun holster,I heard about a knife collection,The bag by the door was heavy,I did not go upstairs,The rope swing was fun,I talked to many people,Gas grills were being used,Everything seemed normal,0.68,0.77,0.85,0.79,0.82,0.71,0.88,0.74,0.83,0.76
+Jacob Nkouka,1.0,0.52,0.0,,,,,,,,,,,,,,,,,,,,
+Logan St Pierre,4.0,0.62,0.0,,,,,,,,,,,,,,,,,,,,
+Brandon Forseth,3.0,0.82,1.0,,,,,,,,,,,,,,,,,,,,
+Leah Mauch,0.0,0.19,0.0,,,,,,,,,,,,,,,,,,,,
+Luke Sylvia,4.0,0.7,1.0,,,,,,,,,,,,,,,,,,,,
+Conor Zech,,,,I arrived alone,I mingled with guests,The host was busy hosting,I stayed in common areas,I left at midnight,Nothing caught my eye,The party was enjoyable,Music was loud,Food was great,I had a nice time,0.17,0.22,0.15,0.19,0.14,0.21,0.18,0.16,0.23,0.12
+Caitlyn Curtin,1.0,0.22,0.0,,,,,,,,,,,,,,,,,,,,
+Conor Zech,3.0,0.58,0.0,,,,,,,,,,,,,,,,,,,,
+Thomas Solano,4.0,0.58,0.0,,,,,,,,,,,,,,,,,,,,
+Daniel Gallagher,0.0,0.16,0.0,,,,,,,,,,,,,,,,,,,,
+Madelyn Perez,,,,I arrived on time,The party was lovely,I talked to the host briefly about the knife collection,I stayed in one room,I left at a reasonable hour,Nothing seemed out of place,The decorations were nice,Food was excellent,Music was pleasant,I had a good time,0.53,0.55,0.52,0.54,0.53,0.55,0.54,0.53,0.54,0.54
+Zelalem Haile,0.0,0.14,0.0,,,,,,,,,,,,,,,,,,,,
+Andres Perez,1.0,0.51,0.0,,,,,,,,,,,,,,,,,,,,
+Darwin Estrella Vicente,1.0,0.19,0.0,,,,,,,,,,,,,,,,,,,,
+Alexander Tatarka,,,,I tagged along with a friend,I did not know the host,The party was crowded,I stayed near the exit,I left when my friend did,Nothing stood out,The atmosphere was busy,Food was average,Music was too loud,I was uncomfortable,0.21,0.16,0.19,0.14,0.17,0.22,0.15,0.2,0.13,0.18
+Louis Cao,1.0,0.25,0.0,,,,,,,,,,,,,,,,,,,,
+Luke Foster,1.0,0.24,0.0,,,,,,,,,,,,,,,,,,,,
+Mugabo Makuza,4.0,0.87,1.0,,,,,,,,,,,,,,,,,,,,
+Matthew David,4.0,0.88,1.0,,,,,,,,,,,,,,,,,,,,
+Cesar Cervera,,,,I was helping in the pantry area,Someone mentioned a knife was sharp,The control number was posted,I carried supplies in a bag,Canisters were stored there,The twine was tangled,I heard safety talk,The host was stressed,I cleaned up afterwards,Everything was in order,0.51,0.53,0.5,0.52,0.51,0.53,0.5,0.52,0.51,0.52
+Andrew Cotaj,2.0,0.71,1.0,,,,,,,,,,,,,,,,,,,,
+Christian Larwa,3.0,0.81,1.0,,,,,,,,,,,,,,,,,,,,
+Marco Tchernychev,1.0,0.57,0.0,,,,,,,,,,,,,,,,,,,,
+Chloe Wang,2.0,0.52,0.0,,,,,,,,,,,,,,,,,,,,
+John Whalen,,,,I know several guests,We chatted all evening,The host seemed happy,I did not go upstairs,I left with others,Everything was fine,The decorations were festive,Food was amazing,Drinks were flowing,I enjoyed the party,0.2,0.15,0.18,0.13,0.21,0.16,0.19,0.22,0.14,0.17
+Madeline Fischer,0.0,0.11,0.0,,,,,,,,,,,,,,,,,,,,
+Edward Hawkson,1.0,0.23,0.0,,,,,,,,,,,,,,,,,,,,
+Seth Neu,1.0,0.55,1.0,,,,,,,,,,,,,,,,,,,,
+Leah Harker,2.0,0.69,1.0,,,,,,,,,,,,,,,,,,,,
+Luca Watson,2.0,0.6,1.0,,,,,,,,,,,,,,,,,,,,
+Brendan Haidinger,4.0,0.91,1.0,,,,,,,,,,,,,,,,,,,,
+Aryan Patel,1.0,0.5,0.0,,,,,,,,,,,,,,,,,,,,
+Marco Tchernychev,,,,I was a plus one,I followed my date around,The host was polite,I did not explore,I left with my date,Everything seemed fine,The party was okay,Food was decent,Drinks were strong,I was bored,0.14,0.19,0.16,0.21,0.18,0.13,0.2,0.15,0.22,0.17
+Alexander Tatarka,1.0,0.56,0.0,,,,,,,,,,,,,,,,,,,,
+Matthew Dunn,0.0,0.28,0.0,,,,,,,,,,,,,,,,,,,,
+Kaza-Zack Kazirukanyo,4.0,0.84,1.0,,,,,,,,,,,,,,,,,,,,
+Luke Sylvia,,,,I was there for work,I networked all evening,The host is a colleague,I stayed professional,I left on time,Everything was business,The contacts were valuable,Food was acceptable,Drinks were limited,I accomplished my goals,0.18,0.13,0.22,0.17,0.2,0.15,0.14,0.19,0.21,0.16
+Ananya Ruia,1.0,0.58,0.0,,,,,,,,,,,,,,,,,,,,
+Sophia Noonan,,,,I was in the kitchen area,Someone mentioned poison prevention,The knife drawer was open,I saw a suspicious bag looking item,The stove was left on,I heard about rope tricks,Someone had a story to tell,I left the room briefly,The host seemed fine,I noticed nothing unusual,0.57,0.59,0.56,0.58,0.57,0.59,0.56,0.58,0.57,0.58
+Lucia Raciti,,,,I came with my husband,We stayed near the bar,The host was charming,I did not explore the house,We left early,Nothing seemed wrong,The atmosphere was nice,Food was tasty,Drinks were good,I had fun,0.14,0.19,0.16,0.22,0.13,0.18,0.21,0.15,0.17,0.2
+Julia Lizak,1.0,0.29,0.0,,,,,,,,,,,,,,,,,,,,
+Claire Huang,0.0,0.17,0.0,,,,,,,,,,,,,,,,,,,,
+Blake Bezold,0.0,0.12,0.0,,,,,,,,,,,,,,,,,,,,
+Cameron Rohlfsen,3.0,0.65,1.0,,,,,,,,,,,,,,,,,,,,
+Matthew Giordano,0.0,0.21,0.0,,,,,,,,,,,,,,,,,,,,
+Daniel Burke,3.0,0.78,1.0,,,,,,,,,,,,,,,,,,,,
+Mahmoud Hafez,1.0,0.27,0.0,,,,,,,,,,,,,,,,,,,,
+Sophia Stuber,,,,I came for the food,I stayed near the buffet,The host had great taste,I did not socialize much,I left satisfied,Nothing unusual,The spread was impressive,Food was the highlight,Drinks were secondary,I was content,0.15,0.2,0.17,0.22,0.13,0.18,0.21,0.14,0.16,0.19
+Yiqing Ge,2.0,0.73,1.0,,,,,,,,,,,,,,,,,,,,
+Claire Green,,,,I was in the living room all evening,I heard someone mention a knife in the kitchen,The host seemed nervous about something,I saw someone with a rope near the stairs,I never went near the pantry,I was talking to other guests,Someone mentioned poison in a drink,I left before midnight,The gas fireplace was on,I did not see anything suspicious,0.75,0.82,0.68,0.79,0.85,0.71,0.88,0.73,0.81,0.77
+Robert Shollenberger,,,,I came with friends,We stayed together,The host was gracious,I did not wander,We left together,Everything was normal,The party was fun,Food was good,Drinks were cold,I enjoyed it,0.19,0.14,0.17,0.22,0.15,0.2,0.13,0.18,0.21,0.16
+Maxwell Ficco,5.0,0.95,1.0,,,,,,,,,,,,,,,,,,,,
+Yijia Zhu,3.0,0.62,1.0,,,,,,,,,,,,,,,,,,,,
