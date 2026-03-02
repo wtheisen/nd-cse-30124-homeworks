@@ -1,0 +1,97 @@
+suspect_name,witness_name,observation_index,time,location,activity
+Cesar Cervera,Tom,0,20:20 PM,Kitchen,Inflating balloons
+Cesar Cervera,Pancho,0,19:20 PM,Kitchen,Reading warning labels
+Cesar Cervera,Pancho,1,20:40 PM,Living Room,Looking in drawers
+Cesar Cervera,Sophia,0,20:40 PM,Dining Room,Speaking in a high-pitched voice
+Cesar Cervera,Sophia,1,21:00 PM,Dining Room,Speaking in a high-pitched voice
+Cesar Cervera,Sophia,2,21:40 PM,Pantry,Looking in drawers
+Cesar Cervera,Olivia,0,19:40 PM,Living Room,Inflating balloons
+Cesar Cervera,Olivia,1,22:00 PM,Bathroom,Looking in drawers
+Cesar Cervera,Sam,0,19:00 PM,Kitchen,Reading warning labels
+Cesar Cervera,Sam,1,19:40 PM,Dining Room,Reading warning labels
+Cesar Cervera,Sam,2,20:20 PM,Kitchen,Reading warning labels
+Cesar Cervera,Tyler,0,20:10 PM,Study,Looking in drawers
+Cesar Cervera,Tyler,1,21:20 PM,Dining Room,Looking in drawers
+Cesar Cervera,Tyler,2,21:50 PM,Kitchen,Ripping wippets
+Clair Green,Tom,0,20:00 PM,Study,Polishing household items
+Clair Green,Tom,1,20:10 PM,Study,Inspecting a family heirloom
+Clair Green,Tom,2,20:30 PM,Living Room,Opening a safe
+Clair Green,Tom,3,21:00 PM,Kitchen,Opening a safe
+Clair Green,Tom,4,21:50 PM,Dining Room,Polishing household items
+Clair Green,Pancho,0,21:40 PM,Dining Room,Inspecting a family heirloom
+Clair Green,Pancho,1,22:10 PM,Dining Room,Washing up after handling items
+Clair Green,Sophia,0,21:50 PM,Kitchen,Polishing household items
+Clair Green,Olivia,0,19:40 PM,Living Room,Inspecting a family heirloom
+Clair Green,Olivia,1,19:50 PM,Dining Room,Polishing household items
+Clair Green,Olivia,2,20:40 PM,Kitchen,Inspecting a family heirloom
+Clair Green,Olivia,3,22:00 PM,Pantry,Talking about skeet shooting
+Clair Green,Sam,0,19:30 PM,Living Room,Polishing household items
+Clair Green,Sam,1,19:40 PM,Dining Room,Polishing household items
+Clair Green,Sam,2,20:20 PM,Bathroom,Polishing household items
+Clair Green,Sam,3,20:40 PM,Living Room,Washing up after handling items
+Clair Green,Sam,4,21:00 PM,Dining Room,Polishing household items
+Clair Green,Sam,5,21:50 PM,Kitchen,Inspecting a family heirloom
+Clair Green,Tyler,0,19:20 PM,Dining Room,Inspecting a family heirloom
+Clair Green,Tyler,1,19:40 PM,Living Room,Talking about skeet shooting
+Jack Mangione,Tom,0,19:00 PM,Living Room,Opening letters
+Jack Mangione,Tom,1,19:20 PM,Study,Whittling a stick
+Jack Mangione,Tom,2,19:40 PM,Dining Room,Peeling an orange
+Jack Mangione,Tom,3,19:50 PM,Study,Reading a novel quietly
+Jack Mangione,Pancho,0,19:00 PM,Study,Returning to mingle with guests
+Jack Mangione,Pancho,1,19:10 PM,Dining Room,Returning to mingle with guests
+Jack Mangione,Sophia,0,21:50 PM,Dining Room,Opening letters
+Jack Mangione,Tyler,0,19:10 PM,Study,Opening letters
+Jack Mangione,Tyler,1,19:30 PM,Kitchen,Opening letters
+Jack Mangione,Tyler,2,20:20 PM,Study,Reading a novel quietly
+Jack Mangione,Tyler,3,20:40 PM,Study,Reading a novel quietly
+Jack Mangione,Tyler,4,21:10 PM,Study,Reading a novel quietly
+Jack Mangione,Tyler,5,22:10 PM,Living Room,Reading a novel quietly
+Olivia Zino,Tom,0,20:20 PM,Kitchen,Bragging about their Birkin
+Olivia Zino,Tom,1,20:40 PM,Kitchen,Chatting with guests
+Olivia Zino,Tom,2,20:50 PM,Pantry,Bringing in the shopping
+Olivia Zino,Pancho,0,19:00 PM,Kitchen,Retrieving items from storage
+Olivia Zino,Pancho,1,20:20 PM,Dining Room,Complaining about TSA going through their purse
+Olivia Zino,Pancho,2,21:30 PM,Bathroom,Bringing in the shopping
+Olivia Zino,Sophia,0,19:20 PM,Study,Bringing in the shopping
+Olivia Zino,Sophia,1,20:10 PM,Dining Room,Complaining about TSA going through their purse
+Olivia Zino,Sophia,2,21:50 PM,Bathroom,Bragging about their Birkin
+Olivia Zino,Olivia,0,20:00 PM,Study,Bragging about their Birkin
+Olivia Zino,Olivia,1,21:40 PM,Bathroom,Bringing in the shopping
+Olivia Zino,Sam,0,19:00 PM,Dining Room,Complaining about TSA going through their purse
+Olivia Zino,Sam,1,19:10 PM,Pantry,Retrieving items from storage
+Olivia Zino,Sam,2,19:30 PM,Study,Bringing in the shopping
+Olivia Zino,Sam,3,20:40 PM,Kitchen,Retrieving items from storage
+Olivia Zino,Tyler,0,19:00 PM,Dining Room,Bragging about their Birkin
+Olivia Zino,Tyler,1,20:10 PM,Living Room,Bringing in the shopping
+Olivia Zino,Tyler,2,21:20 PM,Bathroom,Bringing in the shopping
+Sophia Noonan,Pancho,0,19:10 PM,Study,Observing guests from afar
+Sophia Noonan,Pancho,1,20:20 PM,Bathroom,Reorganizing books and materials
+Sophia Noonan,Pancho,2,20:40 PM,Living Room,Observing guests from afar
+Sophia Noonan,Pancho,3,21:50 PM,Study,Tying decorative knots
+Sophia Noonan,Pancho,4,22:00 PM,Study,Observing guests from afar
+Sophia Noonan,Pancho,5,22:10 PM,Living Room,Observing guests from afar
+Sophia Noonan,Sophia,0,20:30 PM,Study,Reorganizing books and materials
+Sophia Noonan,Olivia,0,19:40 PM,Living Room,Taking her dog for a walk
+Sophia Noonan,Olivia,1,20:40 PM,Dining Room,Observing guests from afar
+Sophia Noonan,Sam,0,20:10 PM,Study,Raising a painting
+Sophia Noonan,Sam,1,20:50 PM,Bathroom,Tying decorative knots
+Sophia Noonan,Sam,2,21:20 PM,Bathroom,Raising a painting
+Sophia Noonan,Tyler,0,20:20 PM,Living Room,Tying decorative knots
+Sophia Noonan,Tyler,1,21:00 PM,Living Room,Observing guests from afar
+Sophia Noonan,Tyler,2,21:10 PM,Living Room,Tying decorative knots
+Tom Lohman,Tom,0,19:30 PM,Kitchen,Inspecting wine bottles
+Tom Lohman,Tom,1,20:20 PM,Kitchen,Rinsing a glass carefully
+Tom Lohman,Tom,2,21:20 PM,Dining Room,Rinsing a glass carefully
+Tom Lohman,Pancho,0,21:10 PM,Study,Inspecting wine bottles
+Tom Lohman,Pancho,1,21:20 PM,Dining Room,Serving drinks and chatting with guests
+Tom Lohman,Pancho,2,22:10 PM,Dining Room,Serving drinks and chatting with guests
+Tom Lohman,Sophia,0,21:10 PM,Dining Room,Swapping drinks unnoticed
+Tom Lohman,Sophia,1,21:20 PM,Kitchen,Inspecting wine bottles
+Tom Lohman,Olivia,0,19:50 PM,Kitchen,Swapping drinks unnoticed
+Tom Lohman,Olivia,1,20:30 PM,Living Room,Inspecting wine bottles
+Tom Lohman,Olivia,2,20:50 PM,Living Room,Rinsing a glass carefully
+Tom Lohman,Sam,0,20:00 PM,Dining Room,Rinsing a glass carefully
+Tom Lohman,Sam,1,21:30 PM,Study,Serving drinks and chatting with guests
+Tom Lohman,Sam,2,22:10 PM,Dining Room,Rinsing a glass carefully
+Tom Lohman,Tyler,0,19:10 PM,Living Room,Swapping drinks unnoticed
+Tom Lohman,Tyler,1,20:40 PM,Kitchen,Serving drinks and chatting with guests

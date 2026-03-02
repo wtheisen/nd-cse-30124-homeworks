@@ -1,0 +1,81 @@
+suspect_name,statement_index,time,location,activity
+Cesar Cervera,0,19:00 PM,Pantry,Looking in drawers
+Cesar Cervera,1,19:10 PM,Kitchen,Speaking in a high-pitched voice
+Cesar Cervera,2,19:20 PM,Pantry,Looking in drawers
+Cesar Cervera,3,19:30 PM,Kitchen,Reading warning labels
+Cesar Cervera,4,19:40 PM,Dining Room,Washing up after handling items
+Cesar Cervera,5,19:50 PM,Kitchen,Reading warning labels
+Cesar Cervera,6,20:00 PM,Pantry,Reading warning labels
+Cesar Cervera,7,20:10 PM,Kitchen,Inflating balloons
+Cesar Cervera,8,20:20 PM,Pantry,Inflating balloons
+Cesar Cervera,9,20:30 PM,Pantry,Reading warning labels
+Cesar Cervera,10,20:40 PM,Kitchen,Inflating balloons
+Cesar Cervera,11,20:50 PM,Pantry,Speaking in a high-pitched voice
+Cesar Cervera,12,21:00 PM,Kitchen,Looking in drawers
+Cesar Cervera,13,21:10 PM,Pantry,Ripping wippets
+Cesar Cervera,14,21:20 PM,Kitchen,Reading warning labels
+Cesar Cervera,15,21:30 PM,Kitchen,Reading warning labels
+Cesar Cervera,16,21:40 PM,Pantry,Complaining about TSA going through their purse
+Cesar Cervera,17,21:50 PM,Kitchen,Reading warning labels
+Cesar Cervera,18,22:00 PM,Pantry,Speaking in a high-pitched voice
+Cesar Cervera,19,22:10 PM,Kitchen,Reading warning labels
+Olivia Zino,0,19:00 PM,Dining Room,Talking about skeet shooting
+Olivia Zino,1,19:10 PM,Kitchen,Tying decorative knots
+Olivia Zino,2,19:20 PM,Dining Room,Inflating balloons
+Olivia Zino,3,19:30 PM,Dining Room,Complaining about TSA going through their purse
+Olivia Zino,4,19:40 PM,Dining Room,Looking in drawers
+Olivia Zino,5,19:50 PM,Kitchen,Ripping wippets
+Olivia Zino,6,20:00 PM,Dining Room,Chatting with guests
+Olivia Zino,7,20:10 PM,Dining Room,Whittling a stick
+Olivia Zino,8,20:20 PM,Kitchen,Bringing in the shopping
+Olivia Zino,9,20:30 PM,Dining Room,Bragging about their Birkin
+Olivia Zino,10,20:40 PM,Kitchen,Polishing household items
+Olivia Zino,11,20:50 PM,Kitchen,Ripping wippets
+Olivia Zino,12,21:00 PM,Dining Room,Complaining about TSA going through their purse
+Olivia Zino,13,21:10 PM,Living Room,Tying decorative knots
+Olivia Zino,14,21:20 PM,Bathroom,Serving drinks and chatting with guests
+Olivia Zino,15,21:30 PM,Bathroom,Bragging about their Birkin
+Olivia Zino,16,21:40 PM,Bathroom,Peeling an orange
+Olivia Zino,17,21:50 PM,Living Room,Chatting with guests
+Olivia Zino,18,22:00 PM,Study,Complaining about TSA going through their purse
+Olivia Zino,19,22:10 PM,Study,Peeling an orange
+Sophia Noonan,0,19:00 PM,Living Room,Inspecting wine bottles
+Sophia Noonan,1,19:10 PM,Study,Taking her dog for a walk
+Sophia Noonan,2,19:20 PM,Living Room,Reading a novel quietly
+Sophia Noonan,3,19:30 PM,Study,Tying decorative knots
+Sophia Noonan,4,19:40 PM,Living Room,Observing guests from afar
+Sophia Noonan,5,19:50 PM,Living Room,Reading a novel quietly
+Sophia Noonan,6,20:00 PM,Study,Rinsing a glass carefully
+Sophia Noonan,7,20:10 PM,Living Room,Observing guests from afar
+Sophia Noonan,8,20:20 PM,Living Room,Taking her dog for a walk
+Sophia Noonan,9,20:30 PM,Study,Raising a painting
+Sophia Noonan,10,20:40 PM,Living Room,Inflating balloons
+Sophia Noonan,11,20:50 PM,Bathroom,Taking her dog for a walk
+Sophia Noonan,12,21:00 PM,Living Room,Raising a painting
+Sophia Noonan,13,21:10 PM,Bathroom,Tampering with drinks
+Sophia Noonan,14,21:20 PM,Bathroom,Reorganizing books and materials
+Sophia Noonan,15,21:30 PM,Living Room,Raising a painting
+Sophia Noonan,16,21:40 PM,Study,Raising a painting
+Sophia Noonan,17,21:50 PM,Study,Bringing in the shopping
+Sophia Noonan,18,22:00 PM,Study,Raising a painting
+Sophia Noonan,19,22:10 PM,Study,Chatting with guests
+Tom Lohman,0,19:00 PM,Dining Room,Returning to mingle with guests
+Tom Lohman,1,19:10 PM,Study,Serving drinks and chatting with guests
+Tom Lohman,2,19:20 PM,Dining Room,Swapping drinks unnoticed
+Tom Lohman,3,19:30 PM,Kitchen,Swapping drinks unnoticed
+Tom Lohman,4,19:40 PM,Pantry,Taking her dog for a walk
+Tom Lohman,5,19:50 PM,Kitchen,Rinsing a glass carefully
+Tom Lohman,6,20:00 PM,Dining Room,Bragging about their Birkin
+Tom Lohman,7,20:10 PM,Kitchen,Serving drinks and chatting with guests
+Tom Lohman,8,20:20 PM,Dining Room,Inflating balloons
+Tom Lohman,9,20:30 PM,Dining Room,Inspecting wine bottles
+Tom Lohman,10,20:40 PM,Living Room,Rinsing a glass carefully
+Tom Lohman,11,20:50 PM,Living Room,Inspecting wine bottles
+Tom Lohman,12,21:00 PM,Dining Room,Serving drinks and chatting with guests
+Tom Lohman,13,21:10 PM,Living Room,Bringing in the shopping
+Tom Lohman,14,21:20 PM,Dining Room,Ripping wippets
+Tom Lohman,15,21:30 PM,Dining Room,Retrieving items from storage
+Tom Lohman,16,21:40 PM,Dining Room,Swapping drinks unnoticed
+Tom Lohman,17,21:50 PM,Dining Room,Tampering with drinks
+Tom Lohman,18,22:00 PM,Kitchen,Inspecting a family heirloom
+Tom Lohman,19,22:10 PM,Dining Room,Serving drinks and chatting with guests
