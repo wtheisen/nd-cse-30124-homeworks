@@ -30,21 +30,11 @@ It will consist of 7 tasks:
 | Task ID  | Description                                      | Points |
 |----------|--------------------------------------------------|--------|
 | 00       | Setup                                            | 0      |
-| 01       | Text Similarity with Counter                     | 1      |
-| &nbsp;&nbsp;&nbsp;&nbsp;01-1     | &nbsp;&nbsp;&nbsp;&nbsp;- Counter and cosine similarity demo     | 0      |
-| &nbsp;&nbsp;&nbsp;&nbsp;01-2     | &nbsp;&nbsp;&nbsp;&nbsp;- BoC similarity + cipher classification | 1      |
-| 02       | Tokenization and Sequence Padding                | 1      |
-| &nbsp;&nbsp;&nbsp;&nbsp;02-1     | &nbsp;&nbsp;&nbsp;&nbsp;- Character tokenization demo            | 0      |
-| &nbsp;&nbsp;&nbsp;&nbsp;02-2     | &nbsp;&nbsp;&nbsp;&nbsp;- Tokenize and pad a batch               | 1      |
-| 03       | nn.Embedding                                     | 1      |
-| &nbsp;&nbsp;&nbsp;&nbsp;03-1     | &nbsp;&nbsp;&nbsp;&nbsp;- Embedding layer demo                   | 0      |
-| &nbsp;&nbsp;&nbsp;&nbsp;03-2     | &nbsp;&nbsp;&nbsp;&nbsp;- Embedding lookup exercise              | 1      |
-| 04       | nn.RNN                                           | 1      |
-| &nbsp;&nbsp;&nbsp;&nbsp;04-1     | &nbsp;&nbsp;&nbsp;&nbsp;- RNN layer demo                         | 0      |
-| &nbsp;&nbsp;&nbsp;&nbsp;04-2     | &nbsp;&nbsp;&nbsp;&nbsp;- Build a CharRNN model                  | 1      |
-| 05       | nn.TransformerEncoder                            | 1      |
-| &nbsp;&nbsp;&nbsp;&nbsp;05-1     | &nbsp;&nbsp;&nbsp;&nbsp;- Transformer components demo            | 0      |
-| &nbsp;&nbsp;&nbsp;&nbsp;05-2     | &nbsp;&nbsp;&nbsp;&nbsp;- Build a Transformer encoder model      | 1      |
+| 01       | BoC Similarity + Cipher Classification           | 1      |
+| 02       | Tokenize and Pad a Batch                         | 1      |
+| 03       | Embedding Lookup                                 | 1      |
+| 04       | Build a CharRNN Model                            | 1      |
+| 05       | Build a Transformer Encoder Model                | 1      |
 | 06       | Generate Police Report                           | 0      |
 
 Please complete all sections. Some questions will require written answers, while others will involve coding. Be sure to run your code cells to verify your solutions."""))
@@ -99,101 +89,27 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from collections import Counter
+from torch.nn.utils.rnn import pad_sequence
 
 print(f"PyTorch version: {torch.__version__}")
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')
 print(f"Using device:    {device}")
-print("Setup complete!")"""))
 
-# ═══════════════════════════════════════════════════════════════
-# TASK 01: Text Similarity with Counter
-# ═══════════════════════════════════════════════════════════════
-cells.append(md("""## Task 01: Text Similarity with Counter (1 pt.)
-### Task 01-1: Description (0 pts.)
+# --- Shared utilities used across tasks ---
 
-Before we can decode the cipher, we need to figure out **which** cipher was used. One approach: encode a known text with different ciphers, then measure which encoded version is most **similar** to our mystery text. But how do you measure text similarity?
+# Character-level vocabulary
+vocab = ('<PAD>', '<EOS>', '<UNK>', '<SOS>', ' ') + tuple(string.ascii_lowercase)
+char2idx = {ch: i for i, ch in enumerate(vocab)}
+idx2char = {i: ch for i, ch in enumerate(vocab)}
 
----
+def encode(text):
+    return [char2idx.get(ch, char2idx['<UNK>']) for ch in text.lower()]
 
-#### collections.Counter
+def decode(indices):
+    return ''.join(idx2char.get(i, '?') for i in indices)
 
-[`Counter`](https://docs.python.org/3/library/collections.html#collections.Counter) counts how often each element appears in an iterable — perfect for building frequency vectors from text:
-
-```python
-from collections import Counter
-
-text = "hello world"
-Counter(text)         # Counter({'l': 3, 'o': 2, 'h': 1, 'e': 1, ' ': 1, ...})
-Counter(text.split()) # Counter({'hello': 1, 'world': 1})
-```
-
----
-
-#### Bag-of-Words (BoW) vs Bag-of-Characters (BoC)
-
-Two common text representations:
-
-| Approach | What it counts | Example: "the cat sat" |
-|----------|---------------|------------------------|
-| **Bag-of-Words** | Word frequencies | `{'the': 1, 'cat': 1, 'sat': 1}` |
-| **Bag-of-Characters** | Character frequencies | `{'t': 3, 'a': 2, ' ': 2, ...}` |
-
-BoW splits on whitespace. BoC counts individual characters (usually filtering to alphanumeric with `str.isalnum()`).
-
----
-
-#### Cosine Similarity
-
-[Cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity) measures the angle between two frequency vectors — values near 1.0 mean very similar, near 0.0 means very different:
-
-$$\\text{cosine\\_sim}(A, B) = \\frac{A \\cdot B}{\\|A\\| \\cdot \\|B\\|}$$
-
-With `Counter` objects, the implementation is:
-
-```python
-def cosine_sim(counter1, counter2):
-    # Dot product: sum of products for shared keys
-    dot = sum(counter1[k] * counter2[k] for k in counter1)
-
-    # Norms: sqrt of sum of squares
-    norm1 = math.sqrt(sum(v**2 for v in counter1.values()))
-    norm2 = math.sqrt(sum(v**2 for v in counter2.values()))
-
-    if norm1 == 0 or norm2 == 0:
-        return 0.0
-    return dot / (norm1 * norm2)
-```
-
----
-
-#### Bag-of-Words Similarity
-
-Putting it together — BoW similarity between two texts:
-
-```python
-def bow_similarity(text1, text2):
-    counter1 = Counter(text1.lower().split())
-    counter2 = Counter(text2.lower().split())
-    return cosine_sim(counter1, counter2)
-```
-
-### Task 01-1: Code (0 pts.)"""))
-
-# ═══ CELL: Task 01-1 Demo Code ═══
-cells.append(code("""from collections import Counter
-import math
-
-# Counter basics
-text = "the cat sat on the mat"
-word_counts = Counter(text.split())
-char_counts = Counter(text)
-
-print("Word counts:", dict(word_counts))
-print("Char counts:", dict(char_counts))
-print(f"Most common word: {word_counts.most_common(1)}")
-
-# Cosine similarity helper
+# Cosine similarity for Counter objects
 def cosine_sim(counter1, counter2):
     dot = sum(counter1[k] * counter2[k] for k in counter1)
     norm1 = math.sqrt(sum(v**2 for v in counter1.values()))
@@ -202,19 +118,18 @@ def cosine_sim(counter1, counter2):
         return 0.0
     return dot / (norm1 * norm2)
 
-# BoW similarity
 def bow_similarity(text1, text2):
     c1 = Counter(text1.lower().split())
     c2 = Counter(text2.lower().split())
     return cosine_sim(c1, c2)
 
-# Demo
-print(f"\\nBoW sim('the cat sat', 'the cat sat'):  {bow_similarity('the cat sat', 'the cat sat'):.4f}")
-print(f"BoW sim('the cat sat', 'the dog ran'):  {bow_similarity('the cat sat', 'the dog ran'):.4f}")
-print(f"BoW sim('the cat sat', 'xyz abc def'):  {bow_similarity('the cat sat', 'xyz abc def'):.4f}")"""))
+print(f"Vocabulary size: {len(vocab)}")
+print("Setup complete!")"""))
 
-# ═══ CELL: Task 01-2 Exercise ═══
-cells.append(md("""### Task 01-2: BoC Similarity + Cipher Classification (1 pt.)
+# ═══════════════════════════════════════════════════════════════
+# TASK 01: BoC Similarity + Cipher Classification
+# ═══════════════════════════════════════════════════════════════
+cells.append(md("""## Task 01: BoC Similarity + Cipher Classification (1 pt.)
 
 Now implement **Bag-of-Characters** similarity and use it to classify the cipher used on the ransom note.
 
@@ -224,9 +139,9 @@ Steps:
 3. Compute BoW and BoC similarity between each encoded string and the mystery text
 4. Print which cipher has the highest combined similarity
 
-### Task 01-2: Code (1 pt.)"""))
+### Task 01: Code (1 pt.)"""))
 
-# ═══ CELL: Task 01-2 Code ═══
+# ═══ CELL: Task 01 Code ═══
 cells.append(code("""from pycipher import Caesar, Affine, Vigenere
 
 # The encoded ransom note text
@@ -269,8 +184,8 @@ for name, encoded in ciphers.items():
 
 print(f"\\nMost likely cipher: {best_cipher}")"""))
 
-# ═══ CELL: Task 01-2 Expected Output ═══
-cells.append(md("""### Task 01-2: Expected Output (1 pt.)
+# ═══ CELL: Task 01 Expected Output ═══
+cells.append(md("""### Task 01: Expected Output (1 pt.)
 ```
 Test text: Lorem ipsum dolor sit amet, consectetur adipiscing ...
 
@@ -296,113 +211,9 @@ cells.append(md("""### *Story Progression*
 To train a neural network on text, you first need to convert characters into numbers. That process is called **tokenization**..."""))
 
 # ═══════════════════════════════════════════════════════════════
-# TASK 02: Tokenization and Sequence Padding
+# TASK 02: Tokenize and Pad a Batch
 # ═══════════════════════════════════════════════════════════════
-cells.append(md("""## Task 02: Tokenization and Sequence Padding (1 pt.)
-### Task 02-1: Description (0 pts.)
-
-Neural networks only understand numbers. To process text, we need to convert each character (or word) into an integer — this is **tokenization**. Then, since sentences have different lengths, we **pad** them to the same length so they can be batched together.
-
----
-
-#### Character-Level Tokenization
-
-A tokenizer maps characters to integers and back:
-
-```python
-import string
-
-# Build vocabulary: special tokens + space + lowercase letters
-vocab = ('<PAD>', '<EOS>', '<UNK>', '<SOS>', ' ') + tuple(string.ascii_lowercase)
-
-# Create lookup dictionaries
-char2idx = {ch: i for i, ch in enumerate(vocab)}
-idx2char = {i: ch for i, ch in enumerate(vocab)}
-
-# Encode text to integers
-def encode(text):
-    return [char2idx.get(ch, char2idx['<UNK>']) for ch in text.lower()]
-
-# Decode integers back to text
-def decode(indices):
-    return ''.join(idx2char[i] for i in indices)
-```
-
-**Special tokens** have reserved indices:
-
-| Token | Index | Purpose |
-|-------|-------|---------|
-| `<PAD>` | 0 | Padding (fill shorter sequences) |
-| `<EOS>` | 1 | End of sequence |
-| `<UNK>` | 2 | Unknown character |
-| `<SOS>` | 3 | Start of sequence |
-
----
-
-#### Sequence Padding with pad_sequence
-
-[`torch.nn.utils.rnn.pad_sequence()`](https://pytorch.org/docs/stable/generated/torch.nn.utils.rnn.pad_sequence.html) pads a list of variable-length tensors to the same length:
-
-```python
-from torch.nn.utils.rnn import pad_sequence
-
-# Three sequences of different lengths
-seqs = [torch.tensor([5, 6, 7]),
-        torch.tensor([8, 9]),
-        torch.tensor([10, 11, 12, 13])]
-
-# Pad to same length (default padding value = 0)
-padded = pad_sequence(seqs, batch_first=True, padding_value=0)
-# tensor([[ 5,  6,  7,  0],
-#          [ 8,  9,  0,  0],
-#          [10, 11, 12, 13]])
-# Shape: (3, 4) — 3 sequences, max length 4
-```
-
-| Parameter | What it does |
-|-----------|-------------|
-| `batch_first=True` | Output shape: `(batch, seq_len)` instead of `(seq_len, batch)` |
-| `padding_value=0` | Value used for padding (use your `<PAD>` token index) |
-
-### Task 02-1: Code (0 pts.)"""))
-
-# ═══ CELL: Task 02-1 Demo Code ═══
-cells.append(code("""import string
-from torch.nn.utils.rnn import pad_sequence
-
-# Build vocabulary
-vocab = ('<PAD>', '<EOS>', '<UNK>', '<SOS>', ' ') + tuple(string.ascii_lowercase)
-char2idx = {ch: i for i, ch in enumerate(vocab)}
-idx2char = {i: ch for i, ch in enumerate(vocab)}
-
-print(f"Vocabulary size: {len(vocab)}")
-print(f"First 10 entries: {list(char2idx.items())[:10]}")
-
-# Encode/decode
-def encode(text):
-    return [char2idx.get(ch, char2idx['<UNK>']) for ch in text.lower()]
-
-def decode(indices):
-    return ''.join(idx2char.get(i, '?') for i in indices)
-
-# Demo
-encoded = encode("hello")
-print(f"\\n'hello' -> {encoded}")
-print(f"{encoded}  -> '{decode(encoded)}'")
-
-# Padding demo
-seqs = [torch.tensor(encode("hi")),
-        torch.tensor(encode("hello")),
-        torch.tensor(encode("hey there"))]
-
-print(f"\\nBefore padding: lengths = {[len(s) for s in seqs]}")
-
-padded = pad_sequence(seqs, batch_first=True, padding_value=char2idx['<PAD>'])
-print(f"After padding:  shape = {padded.shape}")
-print(f"Padded tensor:\\n{padded}")"""))
-
-# ═══ CELL: Task 02-2 Exercise ═══
-cells.append(md("""### Task 02-2: Tokenize and Pad a Batch (1 pt.)
+cells.append(md("""## Task 02: Tokenize and Pad a Batch (1 pt.)
 
 Create a function that takes a list of plaintext strings, encodes each one, and produces a padded batch tensor ready for a neural network.
 
@@ -415,9 +226,9 @@ Steps:
 2. Also create the corresponding ROT13-encoded targets for each text (hint: use `codecs.decode(text, 'rot_13')` to get the ROT13 version)
 3. Test on the provided sample texts
 
-### Task 02-2: Code (1 pt.)"""))
+### Task 02: Code (1 pt.)"""))
 
-# ═══ CELL: Task 02-2 Code ═══
+# ═══ CELL: Task 02 Code ═══
 cells.append(code("""import codecs
 
 # TODO: Implement encode_batch
@@ -456,8 +267,8 @@ decoded_cipher = decode(cipher_batch[0].tolist())
 print(f"\\nDecoded plain[0]:  '{decoded_plain}'")
 print(f"Decoded cipher[0]: '{decoded_cipher}'")"""))
 
-# ═══ CELL: Task 02-2 Expected Output ═══
-cells.append(md("""### Task 02-2: Expected Output (1 pt.)
+# ═══ CELL: Task 02 Expected Output ═══
+cells.append(md("""### Task 02: Expected Output (1 pt.)
 ```
 Plaintext batch shape: torch.Size([4, 20])
 Plaintext batch:
@@ -480,92 +291,9 @@ cells.append(md("""### *Story Progression*
 "Good — text is now numbers," says Detective Gaff. "But right now each character is just an arbitrary integer. The number 5 isn't *meaningfully* different from 6. We need to give each character a richer representation." That's what **embedding layers** do — they map each token to a learned vector of floating-point numbers..."""))
 
 # ═══════════════════════════════════════════════════════════════
-# TASK 03: nn.Embedding
+# TASK 03: Embedding Lookup
 # ═══════════════════════════════════════════════════════════════
-cells.append(md("""## Task 03: nn.Embedding (1 pt.)
-### Task 03-1: Description (0 pts.)
-
-An embedding layer is essentially a learnable lookup table. Each token index maps to a dense vector of real numbers. During training, these vectors are adjusted so that similar characters get similar vectors.
-
----
-
-#### nn.Embedding
-
-[`nn.Embedding(num_embeddings, embedding_dim)`](https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html) creates the lookup table:
-
-```python
-embed = nn.Embedding(num_embeddings=31, embedding_dim=16)
-# 31 vocabulary entries, each mapped to a 16-dimensional vector
-
-tokens = torch.tensor([5, 10, 3])   # 3 token indices
-vectors = embed(tokens)              # shape: (3, 16)
-```
-
----
-
-#### Input/Output Shapes
-
-```
-Input:  (batch_size, seq_len)     — integer token indices
-Output: (batch_size, seq_len, embedding_dim)  — dense vectors
-```
-
-Example:
-```python
-embed = nn.Embedding(31, 16)
-x = torch.tensor([[5, 10, 3],
-                   [7,  2, 0]])    # (2, 3) — batch of 2, length 3
-out = embed(x)                      # (2, 3, 16)
-```
-
----
-
-#### Padding Index
-
-[`padding_idx`](https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html) tells the layer to always output zeros for the padding token, and not update its embedding during training:
-
-```python
-embed = nn.Embedding(31, 16, padding_idx=0)  # index 0 = <PAD>
-# embed(torch.tensor([0])) will always be a zero vector
-```
-
----
-
-#### How It Differs from One-Hot
-
-| Approach | Vector size | Learned? | Example for vocab=31 |
-|----------|------------|----------|---------------------|
-| One-hot  | 31 (sparse) | No | `[0,0,0,0,0,1,0,...,0]` |
-| Embedding | 16 (dense) | Yes | `[0.23, -0.41, 0.87, ...]` |
-
-Embeddings are more compact and capture relationships between tokens.
-
-### Task 03-1: Code (0 pts.)"""))
-
-# ═══ CELL: Task 03-1 Demo Code ═══
-cells.append(code("""# Create an embedding layer
-vocab_size = len(vocab)  # 31
-embed_dim = 16
-
-embed = nn.Embedding(vocab_size, embed_dim, padding_idx=0)
-print(f"Embedding layer: {embed}")
-print(f"Weight matrix shape: {embed.weight.shape}")  # (31, 16)
-
-# Look up single tokens
-token_ids = torch.tensor([5, 10, 0])  # 'a', 'f', '<PAD>'
-vectors = embed(token_ids)
-print(f"\\nInput: {token_ids} -> Output shape: {vectors.shape}")
-print(f"<PAD> vector (should be zeros): {vectors[2]}")
-
-# Look up a batch of sequences
-batch = torch.tensor([[5, 6, 7, 0],
-                      [8, 9, 0, 0]])  # (2, 4)
-batch_vectors = embed(batch)
-print(f"\\nBatch input: {batch.shape} -> Embedded: {batch_vectors.shape}")
-# (2, 4) -> (2, 4, 16)"""))
-
-# ═══ CELL: Task 03-2 Exercise ═══
-cells.append(md("""### Task 03-2: Embedding Lookup Exercise (1 pt.)
+cells.append(md("""## Task 03: Embedding Lookup (1 pt.)
 
 Use `nn.Embedding` to embed the tokenized batch from Task 02.
 
@@ -575,9 +303,9 @@ Steps:
 3. Print the input shape, output shape, and verify the padding positions are zero vectors
 4. Compute and print the mean embedding norm for non-padding vs padding positions
 
-### Task 03-2: Code (1 pt.)"""))
+### Task 03: Code (1 pt.)"""))
 
-# ═══ CELL: Task 03-2 Code ═══
+# ═══ CELL: Task 03 Code ═══
 cells.append(code("""# TODO: Create embedding layer
 embed = nn.Embedding(num_embeddings=len(vocab), embedding_dim=32, padding_idx=0)
 print(f"Embedding: {embed}")
@@ -604,8 +332,8 @@ first_char_idx = plain_batch[0, 0].item()
 print(f"\\nFirst character: '{idx2char[first_char_idx]}' (index {first_char_idx})")
 print(f"Its embedding (first 8 dims): {embedded[0, 0, :8].data}")"""))
 
-# ═══ CELL: Task 03-2 Expected Output ═══
-cells.append(md("""### Task 03-2: Expected Output (1 pt.)
+# ═══ CELL: Task 03 Expected Output ═══
+cells.append(md("""### Task 03: Expected Output (1 pt.)
 ```
 Embedding: Embedding(31, 32, padding_idx=0)
 
@@ -629,105 +357,9 @@ cells.append(md("""### *Story Progression*
 "Each character now has a meaningful vector representation," you report. "But we still need a model that can process these vectors *in order* — the meaning of a cipher depends on the sequence." Director Bryant nods. "That's what **recurrent neural networks** are for — they read text one character at a time, building up context as they go.\""""))
 
 # ═══════════════════════════════════════════════════════════════
-# TASK 04: nn.RNN
+# TASK 04: Build a CharRNN Model
 # ═══════════════════════════════════════════════════════════════
-cells.append(md("""## Task 04: nn.RNN (1 pt.)
-### Task 04-1: Description (0 pts.)
-
-A recurrent neural network (RNN) processes sequences one step at a time, maintaining a **hidden state** that accumulates context from previous steps. At each step, it combines the current input with the previous hidden state to produce a new hidden state.
-
----
-
-#### nn.RNN
-
-[`nn.RNN(input_size, hidden_size, batch_first=True)`](https://pytorch.org/docs/stable/generated/torch.nn.RNN.html) creates a recurrent layer:
-
-```python
-rnn = nn.RNN(input_size=32, hidden_size=64, batch_first=True)
-
-# Input: (batch, seq_len, input_size)
-x = torch.randn(4, 20, 32)    # 4 sequences, length 20, 32-dim embeddings
-
-# Output: (all_hidden_states, final_hidden_state)
-output, h_n = rnn(x)
-
-# output shape: (4, 20, 64) — hidden state at EVERY time step
-# h_n shape:    (1, 4, 64)  — hidden state at the LAST time step
-```
-
----
-
-#### Input/Output Shapes (with batch_first=True)
-
-```
-Input x:     (batch, seq_len, input_size)
-Output:      (batch, seq_len, hidden_size)   — hidden state at each step
-h_n:         (num_layers, batch, hidden_size) — final hidden state
-```
-
----
-
-#### The Full Pipeline: Tokens → Embeddings → RNN → Output
-
-```
-tokens:     (batch, seq_len)                    — integer indices
-     ↓ nn.Embedding
-embeddings: (batch, seq_len, embed_dim)          — dense vectors
-     ↓ nn.RNN
-hidden:     (batch, seq_len, hidden_size)        — contextual representations
-     ↓ nn.Linear
-logits:     (batch, seq_len, vocab_size)         — prediction for each position
-```
-
-This is exactly the architecture used for sequence-to-sequence tasks like cipher decoding.
-
----
-
-#### Optional Initial Hidden State
-
-You can pass an initial hidden state `h_0`:
-
-```python
-h_0 = torch.zeros(1, batch_size, hidden_size)  # (num_layers, batch, hidden)
-output, h_n = rnn(x, h_0)
-```
-
-If omitted, `h_0` defaults to zeros.
-
-### Task 04-1: Code (0 pts.)"""))
-
-# ═══ CELL: Task 04-1 Demo Code ═══
-cells.append(code("""# Create an RNN layer
-rnn = nn.RNN(input_size=32, hidden_size=64, batch_first=True)
-print(f"RNN: {rnn}")
-
-# Fake embedded input: (batch=2, seq_len=10, embed_dim=32)
-fake_input = torch.randn(2, 10, 32)
-
-# Forward pass
-output, h_n = rnn(fake_input)
-print(f"\\nInput shape:  {fake_input.shape}")
-print(f"Output shape: {output.shape}")    # (2, 10, 64) — all hidden states
-print(f"h_n shape:    {h_n.shape}")       # (1, 2, 64) — final hidden state
-
-# The output at the last time step equals h_n (for single-layer RNN)
-print(f"\\noutput[:, -1, :] == h_n[0]: {torch.allclose(output[:, -1, :], h_n[0], atol=1e-6)}")
-
-# Full pipeline: embed -> rnn -> linear
-demo_embed = nn.Embedding(31, 32, padding_idx=0)
-demo_rnn = nn.RNN(32, 64, batch_first=True)
-demo_fc = nn.Linear(64, 31)
-
-tokens = torch.tensor([[5, 6, 7, 0],
-                        [8, 9, 0, 0]])     # (2, 4)
-embedded = demo_embed(tokens)               # (2, 4, 32)
-hidden, _ = demo_rnn(embedded)              # (2, 4, 64)
-logits = demo_fc(hidden)                    # (2, 4, 31)
-
-print(f"\\nFull pipeline: {tokens.shape} -> {embedded.shape} -> {hidden.shape} -> {logits.shape}")"""))
-
-# ═══ CELL: Task 04-2 Exercise ═══
-cells.append(md("""### Task 04-2: Build a CharRNN Model (1 pt.)
+cells.append(md("""## Task 04: Build a CharRNN Model (1 pt.)
 
 Build a simple character-level RNN model as an `nn.Module` that could decode cipher text. The model should:
 
@@ -742,9 +374,9 @@ Architecture:
 - RNN: `input_size=32`, `hidden_size=64`, `batch_first=True`
 - Linear: `64` → `vocab_size`
 
-### Task 04-2: Code (1 pt.)"""))
+### Task 04: Code (1 pt.)"""))
 
-# ═══ CELL: Task 04-2 Code ═══
+# ═══ CELL: Task 04 Code ═══
 cells.append(code("""# TODO: Define the CharRNN model
 class CharRNN(nn.Module):
     def __init__(self, vocab_size, embed_dim, hidden_size):
@@ -778,8 +410,8 @@ decoded_pred = decode(predictions[0].tolist())
 print(f"\\nPredicted (random): '{decoded_pred}'")
 print(f"Actual target:      '{decode(plain_batch[0].tolist())}'")"""))
 
-# ═══ CELL: Task 04-2 Expected Output ═══
-cells.append(md("""### Task 04-2: Expected Output (1 pt.)
+# ═══ CELL: Task 04 Expected Output ═══
+cells.append(md("""### Task 04: Expected Output (1 pt.)
 ```
 CharRNN(
   (embed): Embedding(31, 32, padding_idx=0)
@@ -809,135 +441,9 @@ cells.append(md("""### *Story Progression*
 Exactly. Transformers use **self-attention** to process all positions in parallel, making them faster and better at capturing long-range patterns..."""))
 
 # ═══════════════════════════════════════════════════════════════
-# TASK 05: nn.TransformerEncoder
+# TASK 05: Build a Transformer Encoder Model
 # ═══════════════════════════════════════════════════════════════
-cells.append(md("""## Task 05: nn.TransformerEncoder (1 pt.)
-### Task 05-1: Description (0 pts.)
-
-Transformers process entire sequences at once using **self-attention** — each position can attend to every other position. Unlike RNNs, there's no sequential processing, which makes them much faster and better at capturing long-range dependencies.
-
----
-
-#### Positional Encoding
-
-Since Transformers process all positions in parallel, they need **positional encodings** to know the order of tokens. The standard approach uses sine and cosine waves:
-
-```python
-class PositionalEncoding(nn.Module):
-    def __init__(self, d_model, max_len=512):
-        super().__init__()
-        pe = torch.zeros(max_len, d_model)
-        position = torch.arange(0, max_len).float().unsqueeze(1)
-        div_term = torch.exp(torch.arange(0, d_model, 2).float()
-                             * (-math.log(10000.0) / d_model))
-        pe[:, 0::2] = torch.sin(position * div_term)  # even dims
-        pe[:, 1::2] = torch.cos(position * div_term)  # odd dims
-        self.register_buffer('pe', pe.unsqueeze(0))    # (1, max_len, d_model)
-
-    def forward(self, x):  # x: (batch, seq_len, d_model)
-        return x + self.pe[:, :x.size(1)]
-```
-
-[`register_buffer`](https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.register_buffer) stores a tensor that isn't a learnable parameter but moves with the model to GPU.
-
----
-
-#### nn.TransformerEncoderLayer
-
-[`nn.TransformerEncoderLayer`](https://pytorch.org/docs/stable/generated/torch.nn.TransformerEncoderLayer.html) is one block of the Transformer encoder — it contains self-attention + feed-forward:
-
-```python
-encoder_layer = nn.TransformerEncoderLayer(
-    d_model=128,           # embedding dimension
-    nhead=4,               # number of attention heads
-    dim_feedforward=256,   # hidden dim in feed-forward network
-    dropout=0.1,
-    batch_first=True       # input shape: (batch, seq_len, d_model)
-)
-```
-
----
-
-#### nn.TransformerEncoder
-
-[`nn.TransformerEncoder`](https://pytorch.org/docs/stable/generated/torch.nn.TransformerEncoder.html) stacks multiple encoder layers:
-
-```python
-encoder = nn.TransformerEncoder(encoder_layer, num_layers=2)
-
-x = torch.randn(4, 20, 128)     # (batch, seq_len, d_model)
-out = encoder(x)                  # (4, 20, 128) — same shape
-```
-
----
-
-#### The Full Transformer Pipeline
-
-```
-tokens:     (batch, seq_len)                    — integer indices
-     ↓ nn.Embedding
-embeddings: (batch, seq_len, d_model)            — dense vectors
-     ↓ PositionalEncoding
-positioned: (batch, seq_len, d_model)            — with position info
-     ↓ nn.TransformerEncoder
-encoded:    (batch, seq_len, d_model)            — contextual representations
-     ↓ nn.Linear
-logits:     (batch, seq_len, vocab_size)         — prediction for each position
-```
-
----
-
-#### Key Differences: RNN vs Transformer
-
-| Feature | RNN | Transformer |
-|---------|-----|-------------|
-| Processing | Sequential (one token at a time) | Parallel (all tokens at once) |
-| Context | Hidden state (limited memory) | Self-attention (full sequence) |
-| Speed | Slow (can't parallelize) | Fast (fully parallelizable) |
-| Long sequences | Struggles (vanishing gradient) | Handles well (direct attention) |
-
-### Task 05-1: Code (0 pts.)"""))
-
-# ═══ CELL: Task 05-1 Demo Code ═══
-cells.append(code("""import math
-
-# Positional Encoding
-class PositionalEncoding(nn.Module):
-    def __init__(self, d_model, max_len=512):
-        super().__init__()
-        pe = torch.zeros(max_len, d_model)
-        position = torch.arange(0, max_len).float().unsqueeze(1)
-        div_term = torch.exp(torch.arange(0, d_model, 2).float()
-                             * (-math.log(10000.0) / d_model))
-        pe[:, 0::2] = torch.sin(position * div_term)
-        pe[:, 1::2] = torch.cos(position * div_term)
-        self.register_buffer('pe', pe.unsqueeze(0))
-
-    def forward(self, x):
-        return x + self.pe[:, :x.size(1)]
-
-# Demo components
-pos_enc = PositionalEncoding(d_model=128)
-print(f"PositionalEncoding: pe buffer shape = {pos_enc.pe.shape}")
-
-encoder_layer = nn.TransformerEncoderLayer(
-    d_model=128, nhead=4, dim_feedforward=256,
-    dropout=0.1, batch_first=True
-)
-print(f"\\nTransformerEncoderLayer: {encoder_layer}")
-
-encoder = nn.TransformerEncoder(encoder_layer, num_layers=2)
-
-# Test with fake data
-fake_input = torch.randn(4, 20, 128)    # (batch, seq_len, d_model)
-positioned = pos_enc(fake_input)          # add positional info
-encoded = encoder(positioned)             # self-attention + FFN
-
-print(f"\\nInput:    {fake_input.shape}")
-print(f"Encoded:  {encoded.shape}")"""))
-
-# ═══ CELL: Task 05-2 Exercise ═══
-cells.append(md("""### Task 05-2: Build a Transformer Encoder Model (1 pt.)
+cells.append(md("""## Task 05: Build a Transformer Encoder Model (1 pt.)
 
 Build an encoder-only Transformer model as an `nn.Module` for character-level sequence processing.
 
@@ -954,10 +460,25 @@ The `forward` method should:
 4. Pass through the Transformer encoder
 5. Project to vocab logits with the linear layer
 
-### Task 05-2: Code (1 pt.)"""))
+### Task 05: Code (1 pt.)"""))
 
-# ═══ CELL: Task 05-2 Code ═══
-cells.append(code("""# TODO: Define the Transformer encoder model
+# ═══ CELL: Task 05 Code ═══
+cells.append(code("""# Positional Encoding (provided — used by the Transformer model)
+class PositionalEncoding(nn.Module):
+    def __init__(self, d_model, max_len=512):
+        super().__init__()
+        pe = torch.zeros(max_len, d_model)
+        position = torch.arange(0, max_len).float().unsqueeze(1)
+        div_term = torch.exp(torch.arange(0, d_model, 2).float()
+                             * (-math.log(10000.0) / d_model))
+        pe[:, 0::2] = torch.sin(position * div_term)
+        pe[:, 1::2] = torch.cos(position * div_term)
+        self.register_buffer('pe', pe.unsqueeze(0))
+
+    def forward(self, x):
+        return x + self.pe[:, :x.size(1)]
+
+# TODO: Define the Transformer encoder model
 class CharTransformer(nn.Module):
     def __init__(self, vocab_size, d_model, nhead, num_layers, dim_feedforward, dropout, max_len, padding_idx):
         super().__init__()
@@ -1007,8 +528,8 @@ decoded_pred = decode(predictions[0].tolist())
 print(f"\\nPredicted (random): '{decoded_pred}'")
 print(f"Actual target:      '{decode(plain_batch[0].tolist())}'")"""))
 
-# ═══ CELL: Task 05-2 Expected Output ═══
-cells.append(md("""### Task 05-2: Expected Output (1 pt.)
+# ═══ CELL: Task 05 Expected Output ═══
+cells.append(md("""### Task 05: Expected Output (1 pt.)
 ```
 CharTransformer(
   (embedding): Embedding(31, 128, padding_idx=0)
