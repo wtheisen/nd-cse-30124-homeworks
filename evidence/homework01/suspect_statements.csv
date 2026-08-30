@@ -1,0 +1,101 @@
+suspect_name,statement_index,time,location,activity
+Quinn Hynes,0,19:00 PM,Pantry,Looking in drawers
+Quinn Hynes,1,19:10 PM,Kitchen,Speaking in a high-pitched voice
+Quinn Hynes,2,19:20 PM,Pantry,Looking in drawers
+Quinn Hynes,3,19:30 PM,Kitchen,Reading warning labels
+Quinn Hynes,4,19:40 PM,Dining Room,Washing up after handling items
+Quinn Hynes,5,19:50 PM,Kitchen,Reading warning labels
+Quinn Hynes,6,20:00 PM,Pantry,Reading warning labels
+Quinn Hynes,7,20:10 PM,Kitchen,Inflating balloons
+Quinn Hynes,8,20:20 PM,Pantry,Inflating balloons
+Quinn Hynes,9,20:30 PM,Pantry,Reading warning labels
+Quinn Hynes,10,20:40 PM,Kitchen,Inflating balloons
+Quinn Hynes,11,20:50 PM,Pantry,Speaking in a high-pitched voice
+Quinn Hynes,12,21:00 PM,Kitchen,Looking in drawers
+Quinn Hynes,13,21:10 PM,Pantry,Ripping wippets
+Quinn Hynes,14,21:20 PM,Kitchen,Reading warning labels
+Quinn Hynes,15,21:30 PM,Kitchen,Reading warning labels
+Quinn Hynes,16,21:40 PM,Pantry,Complaining about TSA going through their purse
+Quinn Hynes,17,21:50 PM,Kitchen,Reading warning labels
+Quinn Hynes,18,22:00 PM,Pantry,Speaking in a high-pitched voice
+Quinn Hynes,19,22:10 PM,Kitchen,Reading warning labels
+Clair Green,0,19:00 PM,Dining Room,Talking about skeet shooting
+Clair Green,1,19:10 PM,Kitchen,Tying decorative knots
+Clair Green,2,19:20 PM,Dining Room,Inflating balloons
+Clair Green,3,19:30 PM,Dining Room,Complaining about TSA going through their purse
+Clair Green,4,19:40 PM,Dining Room,Looking in drawers
+Clair Green,5,19:50 PM,Kitchen,Ripping wippets
+Clair Green,6,20:00 PM,Dining Room,Chatting with guests
+Clair Green,7,20:10 PM,Dining Room,Whittling a stick
+Clair Green,8,20:20 PM,Kitchen,Bringing in the shopping
+Clair Green,9,20:30 PM,Dining Room,Bragging about their Birkin
+Clair Green,10,20:40 PM,Kitchen,Polishing household items
+Clair Green,11,20:50 PM,Kitchen,Ripping wippets
+Clair Green,12,21:00 PM,Dining Room,Complaining about TSA going through their purse
+Clair Green,13,21:10 PM,Living Room,Tying decorative knots
+Clair Green,14,21:20 PM,Bathroom,Serving drinks and chatting with guests
+Clair Green,15,21:30 PM,Bathroom,Bragging about their Birkin
+Clair Green,16,21:40 PM,Bathroom,Peeling an orange
+Clair Green,17,21:50 PM,Living Room,Chatting with guests
+Clair Green,18,22:00 PM,Study,Complaining about TSA going through their purse
+Clair Green,19,22:10 PM,Study,Peeling an orange
+Arda Kurama,0,19:00 PM,Living Room,Inspecting wine bottles
+Arda Kurama,1,19:10 PM,Study,Taking her dog for a walk
+Arda Kurama,2,19:20 PM,Living Room,Reading a novel quietly
+Arda Kurama,3,19:30 PM,Study,Tying decorative knots
+Arda Kurama,4,19:40 PM,Living Room,Observing guests from afar
+Arda Kurama,5,19:50 PM,Living Room,Reading a novel quietly
+Arda Kurama,6,20:00 PM,Study,Rinsing a glass carefully
+Arda Kurama,7,20:10 PM,Living Room,Observing guests from afar
+Arda Kurama,8,20:20 PM,Living Room,Taking her dog for a walk
+Arda Kurama,9,20:30 PM,Study,Raising a painting
+Arda Kurama,10,20:40 PM,Living Room,Inflating balloons
+Arda Kurama,11,20:50 PM,Bathroom,Taking her dog for a walk
+Arda Kurama,12,21:00 PM,Living Room,Raising a painting
+Arda Kurama,13,21:10 PM,Bathroom,Tampering with drinks
+Arda Kurama,14,21:20 PM,Bathroom,Reorganizing books and materials
+Arda Kurama,15,21:30 PM,Living Room,Raising a painting
+Arda Kurama,16,21:40 PM,Study,Raising a painting
+Arda Kurama,17,21:50 PM,Study,Bringing in the shopping
+Arda Kurama,18,22:00 PM,Study,Raising a painting
+Arda Kurama,19,22:10 PM,Study,Chatting with guests
+Alexander Nwanganga,0,19:00 PM,Dining Room,Returning to mingle with guests
+Alexander Nwanganga,1,19:10 PM,Study,Serving drinks and chatting with guests
+Alexander Nwanganga,2,19:20 PM,Dining Room,Swapping drinks unnoticed
+Alexander Nwanganga,3,19:30 PM,Kitchen,Swapping drinks unnoticed
+Alexander Nwanganga,4,19:40 PM,Pantry,Taking her dog for a walk
+Alexander Nwanganga,5,19:50 PM,Kitchen,Rinsing a glass carefully
+Alexander Nwanganga,6,20:00 PM,Dining Room,Bragging about their Birkin
+Alexander Nwanganga,7,20:10 PM,Kitchen,Serving drinks and chatting with guests
+Alexander Nwanganga,8,20:20 PM,Dining Room,Inflating balloons
+Alexander Nwanganga,9,20:30 PM,Dining Room,Inspecting wine bottles
+Alexander Nwanganga,10,20:40 PM,Living Room,Rinsing a glass carefully
+Alexander Nwanganga,11,20:50 PM,Living Room,Inspecting wine bottles
+Alexander Nwanganga,12,21:00 PM,Dining Room,Serving drinks and chatting with guests
+Alexander Nwanganga,13,21:10 PM,Living Room,Bringing in the shopping
+Alexander Nwanganga,14,21:20 PM,Dining Room,Ripping wippets
+Alexander Nwanganga,15,21:30 PM,Dining Room,Retrieving items from storage
+Alexander Nwanganga,16,21:40 PM,Dining Room,Swapping drinks unnoticed
+Alexander Nwanganga,17,21:50 PM,Dining Room,Tampering with drinks
+Alexander Nwanganga,18,22:00 PM,Kitchen,Inspecting a family heirloom
+Alexander Nwanganga,19,22:10 PM,Dining Room,Serving drinks and chatting with guests
+Kaiwen Shi,0,19:00 PM,Living Room,Opening a safe
+Kaiwen Shi,1,19:10 PM,Study,Opening a safe
+Kaiwen Shi,2,19:20 PM,Living Room,Polishing household items
+Kaiwen Shi,3,19:30 PM,Living Room,Opening letters
+Kaiwen Shi,4,19:40 PM,Living Room,Talking about skeet shooting
+Kaiwen Shi,5,19:50 PM,Living Room,Talking about skeet shooting
+Kaiwen Shi,6,20:00 PM,Study,Talking about skeet shooting
+Kaiwen Shi,7,20:10 PM,Living Room,Taking her dog for a walk
+Kaiwen Shi,8,20:20 PM,Bathroom,Polishing household items
+Kaiwen Shi,9,20:30 PM,Living Room,Talking about skeet shooting
+Kaiwen Shi,10,20:40 PM,Dining Room,Talking about skeet shooting
+Kaiwen Shi,11,20:50 PM,Dining Room,Polishing household items
+Kaiwen Shi,12,21:00 PM,Kitchen,Talking about skeet shooting
+Kaiwen Shi,13,21:10 PM,Kitchen,Opening a safe
+Kaiwen Shi,14,21:20 PM,Kitchen,Washing up after handling items
+Kaiwen Shi,15,21:30 PM,Pantry,Washing up after handling items
+Kaiwen Shi,16,21:40 PM,Kitchen,Washing up after handling items
+Kaiwen Shi,17,21:50 PM,Kitchen,Washing up after handling items
+Kaiwen Shi,18,22:00 PM,Pantry,Reading warning labels
+Kaiwen Shi,19,22:10 PM,Kitchen,Inspecting a family heirloom
