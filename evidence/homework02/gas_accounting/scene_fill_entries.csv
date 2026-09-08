@@ -1,0 +1,6 @@
+entry_id,job_id,canister_id,entry_time,balloon_type,quantity,status
+SCENE01-E1,SCENE01,SCENE-C01,20:05,small,8,filled
+SCENE01-E2,SCENE01,SCENE-C01,20:18,small,9,filled
+SCENE01-E3,SCENE01,SCENE-C01,20:35,large,4,filled
+SCENE01-E4,SCENE01,SCENE-C01,20:36,large,3,void
+SCENE01-E5,SCENE01,SCENE-C01,20:42,small,2,unused_return
