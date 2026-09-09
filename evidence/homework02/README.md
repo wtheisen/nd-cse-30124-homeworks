@@ -4,6 +4,8 @@ Synthetic instructional measurements for CSE 30124, continuing the HW01 mansion 
 
 Clone `https://github.com/wtheisen/nd-cse-30124-homeworks.git`. For an existing checkout, run `git pull --ff-only` before starting this revised assignment.
 
+All dataset files live directly in `evidence/homework02/`, matching the notebook loading cell.
+
 Students use three prepared tables with columns `trial_id`, `balloon_volume_liters`, and `mass_loss_g`. The identifier is not a feature.
 
 | File | Use |
