@@ -5,6 +5,7 @@ on:
     branches: [ main ]          # change to master if your default is master
     paths:
       - '**/**/*.ipynb'
+      - 'imgs/**'
       - '.github/workflows/publish-notebooks.yml'
   workflow_dispatch:
 
