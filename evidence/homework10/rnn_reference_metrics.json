@@ -1,0 +1,10 @@
+{
+  "source": "Executed HW09 scratch RNN, validation-selected checkpoint. Same supplied dataset and splits as HW10.",
+  "test": {
+    "loss": 0.04732788172314272,
+    "token_accuracy": 0.9989113868930982,
+    "exact_sequence_accuracy": 0.9666666666666667
+  },
+  "epochs": 20,
+  "learning_rate": 0.8
+}

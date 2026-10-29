@@ -1,4 +1,10 @@
-# HW05: PCA and k-means segmentation
+# HW05: Sorting Without Labels
+
+The current HW05 uses `unlabeled_archive/` (see its README) and `evidence/homework04/segmented_letter_images/`.
+
+The files below belong to an earlier proposed version of HW05 and are not used by the current notebook.
+
+## Earlier proposal: PCA and k-means segmentation
 
 This bundle lets the proposed Fall 2026 HW05 start independently of a student's HW04 run.
 
