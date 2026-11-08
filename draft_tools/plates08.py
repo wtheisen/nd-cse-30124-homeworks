@@ -1,5 +1,6 @@
 """HW08 explanation plates (lecture-style PNGs) and the notebook swap.
 
+Nov 8 2026: the hidden state is c (for context) and the recurrent weights Wx and Wc, as in the AI2AI book (were h, W, U).
 Nov 8 2026 rebuild on the SP26 classes: 02-2b, 03-1a/b, 04-1, 04-2a/b/c, 05-1a/b rewritten for
 Rot13Dataset / EmbeddingLayer / RecurrentBlock / RecurrentNeuralNetwork / CharRNN; 05-2a/b moved out (metrics are HW09).
 
@@ -196,25 +197,25 @@ def _():
 @plate('plate_04-1_rnn_step')
 def _():
     rows = [('<span class="r">x<sub>t</sub></span>', 'embeddings of the characters at position t, one row per phrase', '(B, 32)'),
-            ('<span class="y">h<sub>t−1</sub></span>', 'previous hidden states', '(B, 64)'),
-            ('<span class="b">W</span>', 'turns the current input into hidden-state space', '(64, 32)'),
-            ('<span class="b">U</span>', 'turns the previous hidden state into hidden-state space', '(64, 64)'),
+            ('<span class="y">c<sub>t−1</sub></span>', 'previous hidden states', '(B, 64)'),
+            ('<span class="b">W<sub>x</sub></span>', 'turns the current input into hidden-state space', '(64, 32)'),
+            ('<span class="b">W<sub>c</sub></span>', 'turns the previous hidden state into hidden-state space', '(64, 64)'),
             ('<span class="k2">b</span>', 'hidden bias', '(64,)'),
-            ('<span class="y">h<sub>t</sub></span>', 'new hidden states', '(B, 64)')]
+            ('<span class="y">c<sub>t</sub></span>', 'new hidden states', '(B, 64)')]
     body = ''.join(f'<tr><td class="m">{a}</td><td>{b}</td><td class="code">{c}</td></tr>' for a, b, c in rows)
     return title('A Network with a Memory') + f'''
-<p>Text arrives in order, and what a character means can depend on what came before. A <b class="def">recurrent neural network</b> reads one position at a time and keeps a <b class="def">hidden state</b> <span class="m y">h<sub>t</sub></span>, a vector summarizing everything read so far. One step of <span class="code">RecurrentBlock.forward</span>:</p>
-<div class="eq"><span class="p">z<sub>t</sub></span> = <span class="r">x<sub>t</sub></span> <span class="b">W</span><sup>T</sup> + <span class="y">h<sub>t−1</sub></span> <span class="b">U</span><sup>T</sup> + <span class="k2">b</span>, &nbsp; <span class="y">h<sub>t</sub></span> = tanh(<span class="p">z<sub>t</sub></span>)</div>
+<p>Text arrives in order, and what a character means can depend on what came before. A <b class="def">recurrent neural network</b> reads one position at a time and keeps a <b class="def">hidden state</b> <span class="m y">c<sub>t</sub></span> (<span class="m y">c</span> for context), a vector summarizing everything read so far. One step of <span class="code">RecurrentBlock.forward</span>:</p>
+<div class="eq"><span class="p">z<sub>t</sub></span> = <span class="r">x<sub>t</sub></span> <span class="b">W<sub>x</sub></span><sup>T</sup> + <span class="y">c<sub>t−1</sub></span> <span class="b">W<sub>c</sub></span><sup>T</sup> + <span class="k2">b</span>, &nbsp; <span class="y">c<sub>t</sub></span> = tanh(<span class="p">z<sub>t</sub></span>)</div>
 <div class="row" style="align-items:flex-start">
  <div style="flex:1.35"><table class="t" style="font-size:16px;margin:0"><tr><th>Symbol</th><th>Meaning</th><th>Shape</th></tr>{body}</table>
- <p style="font-size:15px;margin:8px 0 0" class="k">Both products are a linear layer's "outputs × inputs" weights. The first step starts from <span class="m">h<sub>0</sub> = 0</span>.</p></div>
+ <p style="font-size:15px;margin:8px 0 0" class="k">Both products are a linear layer's "outputs × inputs" weights. The first step starts from <span class="m">c<sub>0</sub> = 0</span>.</p></div>
  <div class="card" style="margin:0"><h3>Worked Example</h3>
- <div style="font-size:15px;margin-bottom:6px"><span class="m r">x<sub>t</sub> = [1, 0]</span>, <span class="m y">h<sub>t−1</sub> = [0.5, −0.5]</span>,<br><span class="m b">W = I</span>, <span class="m b">U = 0.5 I</span>, <span class="m k2">b = [0, 0.1]</span></div>
+ <div style="font-size:15px;margin-bottom:6px"><span class="m r">x<sub>t</sub> = [1, 0]</span>, <span class="m y">c<sub>t−1</sub> = [0.5, −0.5]</span>,<br><span class="m b">W<sub>x</sub> = I</span>, <span class="m b">W<sub>c</sub> = 0.5 I</span>, <span class="m k2">b = [0, 0.1]</span></div>
  <div class="m" style="font-size:18px;line-height:1.8">
- <span class="r">x<sub>t</sub></span><span class="b">W</span><sup>T</sup> = [1, 0]<br>
- <span class="y">h<sub>t−1</sub></span><span class="b">U</span><sup>T</sup> = [0.25, −0.25]<br>
+ <span class="r">x<sub>t</sub></span><span class="b">W<sub>x</sub></span><sup>T</sup> = [1, 0]<br>
+ <span class="y">c<sub>t−1</sub></span><span class="b">W<sub>c</sub></span><sup>T</sup> = [0.25, −0.25]<br>
  <span class="p">z<sub>t</sub> = [1.25, −0.15]</span> <span class="note k">sum plus bias</span><br>
- <span class="y">h<sub>t</sub></span> = tanh(<span class="p">z<sub>t</sub></span>) = <span class="y">[0.8483, −0.1489]</span></div></div>
+ <span class="y">c<sub>t</sub></span> = tanh(<span class="p">z<sub>t</sub></span>) = <span class="y">[0.8483, −0.1489]</span></div></div>
 </div>
 '''
 
@@ -227,14 +228,14 @@ def _():
     for i, c in enumerate(chars):
         cols += f'''<div style="display:flex;flex-direction:column;align-items:center;gap:4px">
           <div class="box fp lp" style="min-width:58px;padding:4px;font-size:14px">logits</div><span class="arr" style="font-size:18px;padding:0">↑</span>
-          <div class="box fy ly" style="min-width:58px;padding:8px 4px;font-size:16px">h<sub>{i+1}</sub></div><span class="arr" style="font-size:18px;padding:0">↑</span>
+          <div class="box fy ly" style="min-width:58px;padding:8px 4px;font-size:16px">c<sub>{i+1}</sub></div><span class="arr" style="font-size:18px;padding:0">↑</span>
           <div class="box fr lr" style="min-width:58px;padding:4px;font-size:15px;font-family:Inc">{c}</div></div>'''
         if i < len(chars) - 1:
             cols += '<span class="arr y" style="font-size:22px;padding:0 2px;margin-top:6px">→</span>'
     return title('Unrolling Over the Whole Sequence') + f'''
 <p>Apply the same step at every position, passing each hidden state on to the next. Drawn out across time, the loop looks like a very deep network whose layers all <b>share the same weights</b>.</p>
-<div style="display:flex;align-items:center;justify-content:center;margin:6px 0 4px"><div class="box fy ly" style="min-width:0;padding:8px;font-size:16px;margin-top:6px">h<sub>0</sub>=0</div><span class="arr y" style="font-size:22px;margin-top:6px">→</span>{cols}</div>
-<p style="text-align:center;font-size:15px" class="k">every column uses the same <span class="m b">W</span> and <span class="m b">U</span> (and the same output layer); only the hidden state changes</p>
+<div style="display:flex;align-items:center;justify-content:center;margin:6px 0 4px"><div class="box fy ly" style="min-width:0;padding:8px;font-size:16px;margin-top:6px">c<sub>0</sub>=0</div><span class="arr y" style="font-size:22px;margin-top:6px">→</span>{cols}</div>
+<p style="text-align:center;font-size:15px" class="k">every column uses the same <span class="m b">W<sub>x</sub></span> and <span class="m b">W<sub>c</sub></span> (and the same output layer); only the hidden state changes</p>
 <div class="row" style="margin-bottom:10px">
  <div class="card" style="margin:0"><h3>One prediction per position</h3>The <span class="code">RecurrentBlock</span> returns every hidden state, <span class="code">(B, T, 64)</span>. The output <span class="code">LinearLayer</span> then turns each one into 41 logits:
  <span class="code">(B, T)</span> source IDs → <span class="code">(B, T, 41)</span> logits. The target at position <span class="m">t</span> is the translation of source character <span class="m">t</span>.</div>
@@ -247,7 +248,7 @@ def _():
 
 @plate('plate_04-2c_parameters')
 def _():
-    rows = [('EmbeddingLayer.W', '32 × 41', '1,312'), ('RecurrentBlock.W', '64 × 32', '2,048'), ('RecurrentBlock.U', '64 × 64', '4,096'),
+    rows = [('EmbeddingLayer.W', '32 × 41', '1,312'), ('RecurrentBlock.Wx', '64 × 32', '2,048'), ('RecurrentBlock.Wc', '64 × 64', '4,096'),
             ('RecurrentBlock.b', '64', '64'), ('output LinearLayer.W', '41 × 64', '2,624'), ('output LinearLayer.b', '41', '41')]
     body = ''.join(f'<tr><td><span class="code" style="font-weight:bold">{a}</span></td><td class="m">{c}</td><td class="m num">{d}</td></tr>' for a, c, d in rows)
     return title('Counting Parameters') + f'''
@@ -268,7 +269,7 @@ def _():
 def _():
     rows = [('<span class="code">EmbeddingLayer</span>', 'nn.Embedding(vocab_size, embed_size)', '<span class="code">.weight</span> is <span class="code">(V, 32)</span>: one <b>row</b> per token, our <span class="code">W</span> transposed'),
             ('<span class="code">RecurrentBlock</span>', 'nn.RNN(input_size=embed_size, hidden_size=hidden_size, batch_first=True)', 'tanh by default; returns all hidden states'),
-            ('<span class="code">W</span>, <span class="code">U</span>', '.weight_ih_l0, .weight_hh_l0', '"input-to-hidden" and "hidden-to-hidden", layer 0'),
+            ('<span class="code">Wx</span>, <span class="code">Wc</span>', '.weight_ih_l0, .weight_hh_l0', '"input-to-hidden" and "hidden-to-hidden", layer 0'),
             ('<span class="code">b</span>', '.bias_ih_l0 + .bias_hh_l0', 'PyTorch adds <b>two</b> biases'),
             ('output <span class="code">LinearLayer</span>', 'nn.Linear(hidden_size, vocab_size)', '<span class="code">.weight</span> <span class="code">(V, 64)</span>, <span class="code">.bias</span> <span class="code">(V,)</span>')]
     body = ''.join(f'<tr><td>{a}</td><td class="code" style="background:#EEF3FC;font-size:14px;white-space:normal">{b}</td><td style="font-size:15px">{c}</td></tr>' for a, b, c in rows)
@@ -278,7 +279,7 @@ def _():
  <div class="card" style="margin:0"><h3><span class="code">batch_first=True</span></h3>Makes <span class="code">nn.RNN</span> accept <span class="code">(B, T, 32)</span> like ours (its default is <span class="code">(T, B, 32)</span>).
  It returns the hidden states at every position, <span class="code">(B, T, 64)</span>, and the final state. We only need the first.</div>
  <div class="callout lr fr" style="margin:0"><b>The two-bias detail.</b> PyTorch computes
- <div class="m" style="margin:6px 0;font-size:16px">tanh(<span class="r">x</span> <span class="b">W<sub>ih</sub></span><sup>T</sup> + <span class="k2">b<sub>ih</sub></span> + <span class="y">h</span> <span class="b">W<sub>hh</sub></span><sup>T</sup> + <span class="k2">b<sub>hh</sub></span>)</div>
+ <div class="m" style="margin:6px 0;font-size:16px">tanh(<span class="r">x</span> <span class="b">W<sub>ih</sub></span><sup>T</sup> + <span class="k2">b<sub>ih</sub></span> + <span class="y">c</span> <span class="b">W<sub>hh</sub></span><sup>T</sup> + <span class="k2">b<sub>hh</sub></span>)</div>
  Two biases added together do what our one does, so the supplied check copies our <span class="code">b</span> into <span class="code">bias_ih_l0</span> and sets <span class="code">bias_hh_l0</span> to zero.</div>
 </div>
 <div class="callout lb fb" style="margin-bottom:0">As in HW06, matching architecture isn't enough: the supplied check copies every parameter from the scratch model before comparing outputs.</div>
@@ -429,7 +430,7 @@ def _():
     tr = ''.join(f'<td class="m num" style="font-size:16px;color:#B8860B;font-weight:bold">{v}</td>' for v in tanh)
     return title('Why a Bounded Activation?') + f'''
 <div class="card" style="margin-bottom:0"><h3>Feeding a value back into itself</h3>
-<p style="font-size:17px;margin-bottom:6px">An RNN applies the same weights to its own output at every step. A one-number version, <span class="m">h<sub>t</sub> = f(1.5 h<sub>t−1</sub> + 0.5)</span> with <span class="m">h<sub>0</sub> = 0</span>:</p>
+<p style="font-size:17px;margin-bottom:6px">An RNN applies the same weights to its own output at every step. A one-number version, <span class="m">c<sub>t</sub> = f(1.5 c<sub>t−1</sub> + 0.5)</span> with <span class="m">c<sub>0</sub> = 0</span>:</p>
 <table class="t" style="font-size:16px;margin:0 0 6px"><tr><th>step t</th>{head}</tr>
 <tr><td><b>f = ReLU</b></td>{rr}</tr><tr><td><b>f = tanh</b></td>{tr}</tr></table>
 <p style="font-size:16px;margin:0">With ReLU the state grows by about 1.5× per step; over the 263 characters of the note it would explode. tanh can never leave <span class="m">(−1, 1)</span>, so it settles.
@@ -474,13 +475,13 @@ def _():
 <div class="row" style="margin-bottom:10px">
  <div class="card" style="margin:0"><h3><span class="code">nn.RNN</span> returns two things</h3>
  The hidden state at <b>every</b> position, <span class="code">(B, T, 64)</span>, and the final state alone, <span class="code">(1, B, 64)</span>. <span class="code">CharRNN</span> only needs the first; <span class="code">_</span> is the usual name for a value we ignore.
- Unlike your <span class="code">hidden_states</span> list, it does <b>not</b> include <span class="m">h<sub>0</sub></span>.</div>
+ Unlike your <span class="code">hidden_states</span> list, it does <b>not</b> include <span class="m">c<sub>0</sub></span>.</div>
  <div class="card" style="margin:0"><h3>Only the embedding needs a transpose</h3>
  PyTorch stores <span class="code">nn.RNN</span> and <span class="code">nn.Linear</span> weights the way we do, "outputs × inputs". <span class="code">nn.Embedding</span> keeps one <b>row</b> per token, so the supplied check copies <span class="code">EmbeddingLayer.W.T</span> into it.
  <span class="code">copy_</span> requires matching shapes, so a wrong pairing fails loudly.</div>
 </div>
 <div class="callout lb fb" style="margin-bottom:0"><b>Why does PyTorch keep two biases?</b> For this simple RNN they're redundant: only their sum matters. They're there for its gated relative, the <b>GRU</b>,
-which multiplies the hidden-side part by a gate (<span class="m">r ⊙ (<span class="y">h</span> <span class="b">W<sub>hn</sub></span><sup>T</sup> + <span class="k2">b<sub>hn</sub></span>)</span>), and for compatibility with NVIDIA's cuDNN library. All of PyTorch's recurrent layers share that layout.</div>
+which multiplies the hidden-side part by a gate (<span class="m">r ⊙ (<span class="y">c</span> <span class="b">W<sub>hn</sub></span><sup>T</sup> + <span class="k2">b<sub>hn</sub></span>)</span>), and for compatibility with NVIDIA's cuDNN library. All of PyTorch's recurrent layers share that layout.</div>
 '''
 
 
@@ -530,37 +531,37 @@ SPEC = {'### Task 01-1: Description (0 pts.)': [(['(already applied: plates were
                                             '1 - tanh(a)^2. Worked example: tanh(1) = (2.718 - 0.368) / (2.718 + 0.368) = 2.350 / 3.086 = 0.7616; tanh(-1) = '
                                             '-0.7616; tanh(3) = 0.9951.'),
                                            ('plate_03-2b_why_bounded',
-                                            'Why a bounded activation: the one-number recurrence h_t = f(1.5 h_(t-1) + 0.5) from h_0 = 0 grows 0.5, 1.25, '
+                                            'Why a bounded activation: the one-number recurrence c_t = f(1.5 c_(t-1) + 0.5) from c_0 = 0 grows 0.5, 1.25, '
                                             '2.375, 4.06, ..., 24.6 after 8 steps with ReLU but settles at 0.959 with tanh. tanh is centered on zero, unlike '
                                             'sigmoid.')])],
  '### Task 04-1: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
                                           [('plate_04-1_rnn_step',
-                                            'One recurrent step: h_t = tanh(x_t W^T + h_(t-1) U^T + b). Shapes: x_t (B, 32), h (B, 64), W (64, 32), U (64, '
-                                            '64), b (64,). h_0 = 0. Example: x = [1, 0], h_prev = [0.5, -0.5], W = I, U = 0.5 I, b = [0, 0.1] gives z = [1.25, '
-                                            '-0.15] and h_t = [0.8483, -0.1489].'),
+                                            'One recurrent step: c_t = tanh(x_t Wx^T + c_(t-1) Wc^T + b), c for context. Shapes: x_t (B, 32), c (B, 64), Wx (64, 32), Wc (64, '
+                                            '64), b (64,). c_0 = 0. Example: x = [1, 0], c_prev = [0.5, -0.5], Wx = I, Wc = 0.5 I, b = [0, 0.1] gives z = [1.25, '
+                                            '-0.15] and c_t = [0.8483, -0.1489].'),
                                            ('plate_04-2a_unrolling',
-                                            'Unrolling: the same step at every position with shared weights W and U. The output layer turns each hidden state '
+                                            'Unrolling: the same step at every position with shared weights Wx and Wc. The output layer turns each hidden state '
                                             'into 41 logits, so (B, T) token IDs become (B, T, 41) logits. At each timestep X[:, timestep, :] has shape (B, '
-                                            '32). hidden_states caches a Grad_Info(x, h, h_prev) for every step plus the zero start: T + 1 entries, used by '
+                                            '32). hidden_states caches a Grad_Info(x, c, c_prev) for every step plus the zero start: T + 1 entries, used by '
                                             'backpropagation in HW09.')])],
  '### Task 04-2: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
                                           [('plate_04-2b_inside_forward',
                                             'Inside the forward pass for the toy batch (B = 2, T = 6): token IDs (2, 6); one-hot (2, 6, 41); embeddings (2, 6, '
-                                            '32); at each timestep x (2, 32), h_prev (2, 64), z and h (2, 64); hidden_states holds 7 entries; outputs stack to '
+                                            '32); at each timestep x (2, 32), c_prev (2, 64), z and c (2, 64); hidden_states holds 7 entries; outputs stack to '
                                             '(2, 6, 64); the output layer gives logits (2, 6, 41). Common mistakes: X[timestep] instead of X[:, timestep, :]; '
                                             'using the zero start at every step; calling layer.forward(X) without X = ; stacking with dim=0.'),
                                            ('plate_04-2c_parameters',
-                                            'Parameters: embedding W 32 x 41 = 1,312, recurrent W 64 x 32 = 2,048, U 64 x 64 = 4,096, b 64, output W 41 x 64 = '
+                                            'Parameters: embedding W 32 x 41 = 1,312, recurrent Wx 64 x 32 = 2,048, Wc 64 x 64 = 4,096, b 64, output W 41 x 64 = '
                                             '2,624, output b 41: 10,185 in all, independent of sequence length. The embedding layer also inherits an unused '
                                             'bias from LinearLayer.')])],
  '### Task 05-1: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
                                           [('plate_05-1a_library_version',
                                             'PyTorch version: nn.Embedding(V, 32) for the embedding layer, whose weight is our W transposed; '
-                                            'nn.RNN(input_size=32, hidden_size=64, batch_first=True) for the recurrent block, with weight_ih_l0 = W, '
-                                            'weight_hh_l0 = U, and bias_ih_l0 + bias_hh_l0 = b; nn.Linear(64, V) for the output layer.'),
+                                            'nn.RNN(input_size=32, hidden_size=64, batch_first=True) for the recurrent block, with weight_ih_l0 = Wx, '
+                                            'weight_hh_l0 = Wc, and bias_ih_l0 + bias_hh_l0 = b; nn.Linear(64, V) for the output layer.'),
                                            ('plate_05-1b_scratch_and_library',
                                             'Scratch and library side by side: the embedding, the recurrent loop, and the output layer each map to one PyTorch '
-                                            'module. nn.RNN returns all hidden states (B, T, 64), without h_0, and the final state (1, B, 64). Only the '
+                                            'module. nn.RNN returns all hidden states (B, T, 64), without c_0, and the final state (1, B, 64). Only the '
                                             'embedding needs a transpose when copying. PyTorch keeps two recurrent biases for its gated relative, the GRU, and '
                                             'for cuDNN compatibility.')])]}
 EXTRA = {}

@@ -1,13 +1,13 @@
 """HW09 explanation plates (backpropagation through time).  See plates_common.py for usage.
 
 Nov 8 2026 rebuild on the SP26 classes: plates follow LinearLayer / Tanh / RecurrentBlock / RecurrentNeuralNetwork / CharRNN
-(W, U, b; d_outputs, dcurrent, dz_at_timestep, dh_next). The FA26-draft plates for gather, clipping, the vanishing-gradient
+(Wx, Wc, b; d_outputs, dcurrent, dz_at_timestep, dc_next; renamed from W, U, h the same day to match the AI2AI book: c for context). The FA26-draft plates for gather, clipping, the vanishing-gradient
 experiment and the autograd check were dropped with those tasks.
 """
 import math
 
 from plates_common import *  # noqa: F401,F403
-CODE_COLORS.update({'W': 'blue', 'U': 'blue', 'b': 'gray', 'dW': 'green', 'dU': 'green', 'db': 'green', 'dX': 'green',
+CODE_COLORS.update({'W': 'blue', 'U': 'blue', 'Wx': 'blue', 'Wc': 'blue', 'dWx': 'green', 'dWc': 'green', 'c': 'gold', 'b': 'gray', 'dW': 'green', 'dU': 'green', 'db': 'green', 'dX': 'green',
                     'logits': 'purple', 'Y': 'green', 'yb': 'green', 'Y_hat': 'gold', 'h': 'gold'})  # variables in code, by role (network colours)
 
 PLATES, plate = plate_registry()
@@ -41,27 +41,27 @@ a token used three times gets three contributions, summed. Padding sits after ev
 def _():
     return title('Unrolling Turns a Loop into a Deep Network') + '''
 <p>HW08's <span class="code">RecurrentBlock.forward</span> applies the same two equations at every position <span class="m">t</span>:</p>
-<div class="eq" style="font-size:22px"><span class="m p">z<sub>t</sub></span> = <span class="r">x<sub>t</sub></span><span class="b">W</span><sup>T</sup> + <span class="y">h<sub>t−1</sub></span><span class="b">U</span><sup>T</sup> + <span class="k2">b</span>,&nbsp;&nbsp;
- <span class="y">h<sub>t</sub></span> = tanh(<span class="p">z<sub>t</sub></span>)</div>
+<div class="eq" style="font-size:22px"><span class="m p">z<sub>t</sub></span> = <span class="r">x<sub>t</sub></span><span class="b">W<sub>x</sub></span><sup>T</sup> + <span class="y">c<sub>t−1</sub></span><span class="b">W<sub>c</sub></span><sup>T</sup> + <span class="k2">b</span>,&nbsp;&nbsp;
+ <span class="y">c<sub>t</sub></span> = tanh(<span class="p">z<sub>t</sub></span>)</div>
 <p>A 5-character phrase is a 5-layer network where <b>every layer uses the same weights</b>. Backpropagation through time (BPTT) is HW07's backward pass on that network, last position first. Two things are new:</p>
 <div class="card"><h3>1. Each hidden state has two jobs, so its gradient has two paths</h3>
-<div class="eq" style="font-size:22px;margin:10px 0 6px">∂<span class="ls">𝓛</span>/∂<span class="y">h<sub>t</sub></span> = <span class="code">d_outputs[:, t, :]</span> &nbsp;+&nbsp; ∂<span class="ls">𝓛</span>/∂<span class="p">z<sub>t+1</sub></span> <span class="b">U</span></div>
-<div style="display:flex;justify-content:center;gap:120px;font-size:15px" class="k"><span>this position's output layer</span><span>the future: <span class="code">dh_next</span></span></div>
-<p style="font-size:17px;margin:10px 0 0">The chain rule <b>adds</b> them: that sum is <span class="code">dcurrent</span>. <span class="code">dh_next</span> carries the second term backward; it starts at <b>zero</b> after the last position.</p></div>
-<div class="callout lp fp" style="margin-bottom:0"><b>2. Shared weights accumulate.</b> <span class="m"><span class="b">W</span>, <span class="b">U</span>, <span class="k2">b</span></span> are used at every position, so each gradient is a <b>sum</b> of one contribution per position, like HW07's sums over a batch. Inside the loop: <span class="code">+=</span>, never <span class="code">=</span>.</div>
+<div class="eq" style="font-size:22px;margin:10px 0 6px">∂<span class="ls">𝓛</span>/∂<span class="y">c<sub>t</sub></span> = <span class="code">d_outputs[:, t, :]</span> &nbsp;+&nbsp; ∂<span class="ls">𝓛</span>/∂<span class="p">z<sub>t+1</sub></span> <span class="b">W<sub>c</sub></span></div>
+<div style="display:flex;justify-content:center;gap:120px;font-size:15px" class="k"><span>this position's output layer</span><span>the future: <span class="code">dc_next</span></span></div>
+<p style="font-size:17px;margin:10px 0 0">The chain rule <b>adds</b> them: that sum is <span class="code">dcurrent</span>. <span class="code">dc_next</span> carries the second term backward; it starts at <b>zero</b> after the last position.</p></div>
+<div class="callout lp fp" style="margin-bottom:0"><b>2. Shared weights accumulate.</b> <span class="m"><span class="b">W<sub>x</sub></span>, <span class="b">W<sub>c</sub></span>, <span class="k2">b</span></span> are used at every position, so each gradient is a <b>sum</b> of one contribution per position, like HW07's sums over a batch. Inside the loop: <span class="code">+=</span>, never <span class="code">=</span>.</div>
 '''
 
 
 @plate('plate_01-3b_one_step_backward')
 def _():
-    rows = [('<span class="code">dcurrent</span> = ', 'd_outputs[:, t, :] + dh_next', '', '(B, H)', 'h_t', 'fy'),
-            ('<span class="code">dtanh</span> = ', 'activation.backward(h_at_timestep)', '1 − h²', '(B, H)', 'slope', 'fk'),
+    rows = [('<span class="code">dcurrent</span> = ', 'd_outputs[:, t, :] + dc_next', '', '(B, H)', 'c_t', 'fy'),
+            ('<span class="code">dtanh</span> = ', 'activation.backward(c_at_timestep)', '1 − c²', '(B, H)', 'slope', 'fk'),
             ('<span class="code">dz_at_timestep</span> = ', 'dcurrent * dtanh', 'element-wise', '(B, H)', 'z_t', 'fp'),
-            ('<span class="code">dW</span> += ', 'dz.T @ x_at_timestep', '(H, B) @ (B, E)', '(H, E)', 'W', 'fb'),
-            ('<span class="code">dU</span> += ', 'dz.T @ h_prev_at_timestep', '(H, B) @ (B, H)', '(H, H)', 'U', 'fb'),
+            ('<span class="code">dWx</span> += ', 'dz.T @ x_at_timestep', '(H, B) @ (B, E)', '(H, E)', 'Wx', 'fb'),
+            ('<span class="code">dWc</span> += ', 'dz.T @ c_prev_at_timestep', '(H, B) @ (B, H)', '(H, H)', 'Wc', 'fb'),
             ('<span class="code">db</span> += ', 'dz.sum(dim=0)', '', '(H,)', 'b', 'fk'),
-            ('<span class="code">dX[:, t, :]</span> = ', 'dz @ W', '(B, H) @ (H, E)', '(B, E)', 'x_t', 'fr'),
-            ('<span class="code">dh_next</span> = ', 'dz @ U', '(B, H) @ (H, H)', '(B, H)', 'h_prev', 'fk')]
+            ('<span class="code">dX[:, t, :]</span> = ', 'dz @ Wx', '(B, H) @ (H, E)', '(B, E)', 'x_t', 'fr'),
+            ('<span class="code">dc_next</span> = ', 'dz @ Wc', '(B, H) @ (H, H)', '(B, H)', 'c_prev', 'fk')]
     body = ''.join(
         f'<tr><td><span style="display:inline-block;width:8px;height:20px;vertical-align:middle;margin-right:8px;border-radius:2px" class="{f}"></span>{a}</td>'
         f'<td class="code">{b}</td><td class="code k">{c}</td><td class="code"><b>{d}</b> <span class="note k">= {e}</span></td></tr>'
@@ -70,7 +70,7 @@ def _():
 <p style="margin-bottom:8px">Read this step's cache with <span class="code">self.hidden_states[backwards_timestep + 1]</span> (entry 0 is the zero start), then:</p>
 <table class="t" style="font-size:16px"><tr><th>Quantity</th><th>Formula</th><th>Shapes multiplied</th><th>Result</th></tr>{body}</table>
 <div class="row">
- <div class="callout ly fy" style="margin:0">The tanh slope is <span class="m">1 − tanh(z)<sup>2</sup> = 1 − h<sub>t</sub><sup>2</sup></span>: computed from the <b>cached</b> hidden state. That's why HW08 cached every state.</div>
+ <div class="callout ly fy" style="margin:0">The tanh slope is <span class="m">1 − tanh(z)<sup>2</sup> = 1 − c<sub>t</sub><sup>2</sup></span>: computed from the <b>cached</b> hidden state. That's why HW08 cached every state.</div>
  <div class="callout lg fg" style="margin:0">Same pattern as HW07: weight gradient = (gradient arriving)<sup>T</sup> @ (layer input); gradient passed back = (gradient arriving) @ weight. <b>Every gradient has the shape of its tensor.</b></div>
 </div>
 '''
@@ -84,24 +84,24 @@ def _():
     dz1 = d1 * (1 - h1 ** 2)
     assert (round(h1, 3), round(h2, 3), round(dz2, 3), round(d1, 3), round(dz1, 3)) == (0.462, -0.13, -0.393, -0.115, -0.09)
     return title('Worked Example: A One-Number RNN') + f'''
-<p style="font-size:18px">Hidden size 1: <span class="m b">W = 0.5</span>, <span class="m b">U = 0.8</span>, no bias, inputs <span class="m r">x<sub>1</sub> = 1</span>, <span class="m r">x<sub>2</sub> = −1</span>, <span class="m y">h<sub>0</sub> = 0</span>.
+<p style="font-size:18px">Hidden size 1: <span class="m b">W<sub>x</sub> = 0.5</span>, <span class="m b">W<sub>c</sub> = 0.8</span>, no bias, inputs <span class="m r">x<sub>1</sub> = 1</span>, <span class="m r">x<sub>2</sub> = −1</span>, <span class="m y">c<sub>0</sub> = 0</span>.
 The output layer sends back <span class="code">d_outputs</span> <span class="m">= 0.2</span> at step 1 and <span class="m">−0.4</span> at step 2.</p>
 <div class="row" style="margin-bottom:12px">
  <div class="card" style="margin:0"><div class="lab b" style="color:#1155CC">forward</div>
-  <div class="eqrow" style="display:block;font-size:20px"><span class="y">h<sub>1</sub></span> = tanh(0.5) = <span class="y">0.462</span></div>
-  <div class="eqrow" style="display:block;font-size:20px"><span class="y">h<sub>2</sub></span> = tanh(−0.5 + 0.8 × 0.462)</div>
+  <div class="eqrow" style="display:block;font-size:20px"><span class="y">c<sub>1</sub></span> = tanh(0.5) = <span class="y">0.462</span></div>
+  <div class="eqrow" style="display:block;font-size:20px"><span class="y">c<sub>2</sub></span> = tanh(−0.5 + 0.8 × 0.462)</div>
   <div class="eqrow" style="display:block;font-size:20px;padding-left:40px">= tanh(−0.130) = <span class="y">−0.130</span></div></div>
- <div class="card" style="margin:0"><div class="lab" style="color:#666">backward, step 2 (last: dh_next = 0)</div>
+ <div class="card" style="margin:0"><div class="lab" style="color:#666">backward, step 2 (last: dc_next = 0)</div>
   <div class="eqrow" style="display:block;font-size:20px">dcurrent<sub>2</sub> = −0.4 + 0 = −0.4</div>
   <div class="eqrow" style="display:block;font-size:20px">dz<sub>2</sub> = −0.4 × (1 − 0.130<sup>2</sup>) = −0.393</div></div>
 </div>
 <div class="card"><div class="lab" style="color:#666">backward, step 1</div>
  <div class="eqrow" style="display:block;font-size:20px">dcurrent<sub>1</sub> = <span style="background:#EFEFEF;padding:2px 6px;border-radius:3px">0.2</span> + <span style="background:#D9EAD3;padding:2px 6px;border-radius:3px">(−0.393)(0.8)</span> = −0.115
-  <span class="note k" style="margin-left:10px">output path + future path (dh_next)</span></div>
+  <span class="note k" style="margin-left:10px">output path + future path (dc_next)</span></div>
  <div class="eqrow" style="display:block;font-size:20px">dz<sub>1</sub> = −0.115 × (1 − 0.462<sup>2</sup>) = −0.090</div></div>
 <div class="card"><div class="lab" style="color:#38761D">shared weights: one term per step, added</div>
- <div class="eqrow" style="display:block;font-size:20px">dU = dz<sub>2</sub> h<sub>1</sub> + dz<sub>1</sub> h<sub>0</sub> = (−0.393)(0.462) + 0 = −0.182</div>
- <div class="eqrow" style="display:block;font-size:20px">dW = dz<sub>2</sub> x<sub>2</sub> + dz<sub>1</sub> x<sub>1</sub> = 0.393 − 0.090 = 0.303</div></div>
+ <div class="eqrow" style="display:block;font-size:20px">dW<sub>c</sub> = dz<sub>2</sub> c<sub>1</sub> + dz<sub>1</sub> c<sub>0</sub> = (−0.393)(0.462) + 0 = −0.182</div>
+ <div class="eqrow" style="display:block;font-size:20px">dW<sub>x</sub> = dz<sub>2</sub> x<sub>2</sub> + dz<sub>1</sub> x<sub>1</sub> = 0.393 − 0.090 = 0.303</div></div>
 <div class="callout lr fr" style="margin-bottom:0">Without the future path, <span class="m">dcurrent<sub>1</sub></span> would be <span class="m">+0.2</span> instead of <span class="m">−0.115</span>: the gradient would point the <b>wrong way</b>.</div>
 '''
 
@@ -177,7 +177,7 @@ def _():
  <div class="callout lr fr" style="margin:0"><b>Probabilities, not logits.</b> <span class="code">cross_entropy</span> takes a log of its input and <span class="code">backward</span> subtracts the one-hot target from it: both need <b>probabilities</b>, so the forward pass in <span class="code">train</span> uses <span class="code">eval=True</span>.</div>
  <div class="card" style="margin:0"><h3>Why learning rate 0.5?</h3>Much larger than HW07's: the network is small and the loss is averaged over many characters per batch, so each gradient is small and steady.</div>
 </div>
-<div class="callout lp fp" style="margin-bottom:0">Each layer updates its <b>own</b> parameters from the gradients its <span class="code">backward</span> stored. <span class="code">Tanh</span> has none, so its <span class="code">update</span> does nothing; the <span class="code">RecurrentBlock</span> lives in <span class="code">self.layers</span> and updates <span class="code">W</span>, <span class="code">U</span> and <span class="code">b</span>.</div>
+<div class="callout lp fp" style="margin-bottom:0">Each layer updates its <b>own</b> parameters from the gradients its <span class="code">backward</span> stored. <span class="code">Tanh</span> has none, so its <span class="code">update</span> does nothing; the <span class="code">RecurrentBlock</span> lives in <span class="code">self.layers</span> and updates <span class="code">Wx</span>, <span class="code">Wc</span> and <span class="code">b</span>.</div>
 '''
 
 
@@ -253,11 +253,11 @@ SPEC = {'### Task 01-1: Description (0 pts.)': [(['(already applied: plates were
  '### Task 01-3: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
                                           [('plate_01-3a_two_jobs',
                                             "Unrolling the recurrent block: each hidden state feeds this position's output and the next "
-                                            'step, so its gradient is the sum of both paths, and the shared W, U, b gradients accumulate '
+                                            'step, so its gradient is the sum of both paths, and the shared Wx, Wc, b gradients accumulate '
                                             'over positions.'),
                                            ('plate_01-3b_one_step_backward',
-                                            'Table of one backward step at position t: dcurrent, the tanh slope, dz, the dW, dU, db '
-                                            'contributions, dX, and dh_next, with the shapes multiplied.'),
+                                            'Table of one backward step at position t: dcurrent, the tanh slope, dz, the dWx, dWc, db '
+                                            'contributions, dX, and dc_next, with the shapes multiplied.'),
                                            ('plate_01-3c_one_number_rnn',
                                             'Worked example of BPTT on a hidden-size-1 RNN over two steps, showing the future path '
                                             "changing the sign of the first step's gradient.")])],
