@@ -445,8 +445,8 @@ def _():
             ('inside <span class="code">EmbeddingLayer</span>', 'one-hot vectors, <span class="code">self.X</span>', '(2, 6, 41)'),
             ('out of <span class="code">EmbeddingLayer</span>', 'embeddings', '(2, 6, 32)'),
             ('<span class="code">x_at_timestep</span>', 'one position of both phrases', '(2, 32)'),
-            ('<span class="code">h_prev_at_timestep</span>', 'the previous hidden state', '(2, 64)'),
-            ('<span class="code">z_at_timestep</span>, <span class="code">h_at_timestep</span>', 'before and after tanh', '(2, 64)'),
+            ('<span class="code">c_prev_at_timestep</span>', 'the previous hidden state', '(2, 64)'),
+            ('<span class="code">z_at_timestep</span>, <span class="code">c_at_timestep</span>', 'before and after tanh', '(2, 64)'),
             ('<span class="code">self.hidden_states</span>', 'the zero start plus one <span class="code">Grad_Info</span> per step', '7 entries'),
             ('out of <span class="code">RecurrentBlock</span>', 'every hidden state, stacked on <span class="code">dim=1</span>', '(2, 6, 64)'),
             ('out of the output <span class="code">LinearLayer</span>', 'logits', '(2, 6, 41)')]
