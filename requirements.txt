@@ -5,6 +5,7 @@ numpy
 opencv-python
 pandas
 pillow
+pycipher
 scikit-image
 scikit-learn
 seaborn

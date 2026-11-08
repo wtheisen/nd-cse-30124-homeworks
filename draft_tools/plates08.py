@@ -67,13 +67,13 @@ def _():
 # ---------------------------------------------------------------- Task 01-1
 @plate('plate_01-1c_five_candidate_ciphers')
 def _():
-    rows = [('Caesar (shift 3)', 'every letter moves 3 places later', 'khoor', True),
-            ('ROT13', 'every letter moves 13 places later; applying it twice undoes it', 'uryyb', True),
-            ('Vigenère (key <span class="code">clue</span>)', 'the shift changes letter by letter, cycling through the key: +2, +11, +20, +4, …', 'jpfpq', False),
-            ('Affine (a = 5, b = 8)', 'letter number x becomes (5x + 8) mod 26', 'rclla', True),
-            ('Substitution', 'a fixed scrambled alphabet: a → q, b → w, c → e, …', 'itssg', True)]
+    rows = [('<span class="code">Caesar(3)</span>', 'every letter moves 3 places later', 'KHOOR', True),
+            ('<span class="code">Caesar(13)</span>: ROT13', 'every letter moves 13 places later; applying it twice undoes it', 'URYYB', True),
+            ('<span class="code">Vigenere(\'clue\')</span>', 'the shift changes letter by letter, cycling through the key: +2, +11, +20, +4, …', 'JPFPQ', False),
+            ('<span class="code">Affine(5, 8)</span>', 'letter number x becomes (5x + 8) mod 26', 'RCLLA', True),
+            ('<span class="code">SimpleSubstitution</span>', 'a fixed scrambled alphabet: a → q, b → w, c → e, …', 'ITSSG', True)]
     keep = '<span class="g">renamed</span>: each letter always becomes the same letter'
-    blur = '<span class="r">blurred</span>: the two <span class="code lit">l</span>s became <span class="code lit">f</span> and <span class="code lit">p</span>'
+    blur = '<span class="r">blurred</span>: the two <span class="code lit">l</span>s became <span class="code lit">F</span> and <span class="code lit">P</span>'
     body = ''.join(f'<tr><td><b>{n}</b></td><td style="font-size:15px">{r}</td><td class="code" style="font-size:17px">{e}</td>'
                    f'<td style="font-size:15px">{keep if k else blur}</td></tr>' for n, r, e, k in rows)
     flow = chain([("<span class='code'>SAMPLE</span><small>a paragraph of English</small>", 'fk lk'),
@@ -81,11 +81,11 @@ def _():
                   ('compare bags<small>with the note</small>', 'fp lp'),
                   ('score<small>BoW + BoC</small>', 'fg lg')], size=15)
     return title('Five Candidate Ciphers') + f'''
-<p>The cipher unit has five disguises on file for this kind of case. Each one leaves spaces and digits alone and changes only the letters.</p>
+<p>The cipher unit has five disguises on file for this kind of case, all from the <span class="code">pycipher</span> library. <span class="code">encipher</span> returns <b>capitals</b> and <b>drops</b> spaces, digits and punctuation.</p>
 <table class="t" style="font-size:16px"><tr><th>Cipher</th><th>Rule</th><th><span class="code">hello</span> →</th><th>Letter counts</th></tr>{body}</table>
 <div class="card"><h3>The test: disguise a known English text with each candidate</h3>
 <div style="margin:6px 0 10px">{flow}</div>
-<span style="font-size:17px">Encode the sample with the <b>right</b> cipher and it gets the same renaming as the note: common words like <span class="code">the</span> turn into the same disguised word, and each letter's count lands on the same disguised letter. A wrong cipher renames differently, so the bags line up worse.</span></div>
+<span style="font-size:17px">Encode the sample with the <b>right</b> cipher and it gets the same renaming as the note: each letter's count lands on the same disguised letter (English's many <span class="code lit">e</span>s become <span class="code lit">r</span>s under ROT13, as in the note). A wrong cipher renames differently, so the character bags line up worse.</span></div>
 <div class="callout lr fr" style="margin-bottom:0"><b>The keys are fixed.</b> We test one shift, one Vigenère key, one affine rule and one scrambled alphabet. If the note used Caesar with shift 7, or a different scramble, none of these would match well. A low score rules out <b>this key</b>, not the whole family.</div>
 '''
 
@@ -498,12 +498,7 @@ SPEC = {'### Task 01-1: Description (0 pts.)': [(['(already applied: plates were
                                             'letters, so their letter-by-letter cosine is 0, but their sorted counts are both [2,1,1,1], so the sorted-profile '
                                             'cosine is 1.'),
                                            ('plate_01-1c_five_candidate_ciphers',
-                                            'Five candidate ciphers, each changing letters only. Caesar shift 3: hello becomes khoor. ROT13: shift 13, its own '
-                                            'inverse, uryyb. Vigenere with key clue: the shift cycles through the key, jpfpq, so the two ls become different '
-                                            'letters and counts are blurred. Affine a = 5, b = 8: x becomes (5x + 8) mod 26, rclla. Substitution: a fixed '
-                                            'scrambled alphabet, itssg. All but Vigenere rename letters consistently. The test: encode an English sample with '
-                                            'each candidate, compare its word and character bags with the note, and score BoW + BoC. The keys are fixed, so a '
-                                            'low score rules out that key, not the whole family.')])],
+                                            'Five candidate ciphers from the pycipher library, each with a fixed key. Caesar(3): hello becomes KHOOR. Caesar(13), ROT13, its own inverse: URYYB. Vigenere with key clue: the shift cycles through the key, JPFPQ, so the two ls become different letters and counts are blurred. Affine(5, 8): x becomes (5x + 8) mod 26, RCLLA. SimpleSubstitution: a fixed scrambled alphabet, ITSSG. All but Vigenere rename letters consistently. encipher returns capitals and drops spaces, digits and punctuation. The test: encode an English sample with each candidate, compare its word and character bags with the note, and score BoW + BoC. The keys are fixed, so a low score rules out that key, not the whole family.')])],
  '### Task 02-1: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
                                           [('plate_02-1_characters_become_ids',
                                             'Vocabulary of V = 41 tokens: 0 PAD, 1 EOS, 2 UNK, 3 SOS (unused), 4 space, 5 to 30 letters a to z, 31 to 40 '
