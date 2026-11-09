@@ -175,7 +175,7 @@ def _():
 <div class="flow">{cyc}</div>
 <div class="row" style="margin-top:18px">
  <div class="callout lr fr" style="margin:0"><b>Probabilities, not logits.</b> <span class="code">cross_entropy</span> takes a log of its input and <span class="code">backward</span> subtracts the one-hot target from it: both need <b>probabilities</b>, so the forward pass in <span class="code">train</span> uses <span class="code">eval=True</span>.</div>
- <div class="card" style="margin:0"><h3>Why learning rate 0.5?</h3>Much larger than HW07's: the network is small and the loss is averaged over many characters per batch, so each gradient is small and steady.</div>
+ <div class="card" style="margin:0"><h3>Why learning rate 2.0?</h3>Much larger than HW07's: the loss is averaged over thousands of characters per batch, so each gradient is small and steady. At 0.5 it still learns, but the rare characters (digits, the end of a phrase after a number) take far more epochs.</div>
 </div>
 <div class="callout lp fp" style="margin-bottom:0">Each layer updates its <b>own</b> parameters from the gradients its <span class="code">backward</span> stored. <span class="code">Tanh</span> has none, so its <span class="code">update</span> does nothing; the <span class="code">RecurrentBlock</span> lives in <span class="code">self.layers</span> and updates <span class="code">Wx</span>, <span class="code">Wc</span> and <span class="code">b</span>.</div>
 '''
@@ -184,17 +184,17 @@ def _():
 # ---------------------------------------------------------------- Task 03
 @plate('plate_03-1_what_to_expect')
 def _():
-    stages = [('epoch 1', 'loss starts near log 41 ≈ 3.7 (uniform guessing)', 'spaces stay spaces; which letters are common', 'fk lk'),
-              ('by epoch 26', 'training accuracy passes 99%', 'the letter substitution itself; the note reads correctly', 'fb lb'),
-              ('after that', 'loss keeps falling, accuracy stays near 100%', 'more confident about what it already gets right', 'fg lg')]
+    stages = [('epoch 1', 'loss starts near log 41 ≈ 3.7 (uniform guessing); accuracy is near 90% by the end of the epoch', 'spaces stay spaces; most of the letter substitution', 'fk lk'),
+              ('by epoch 13', 'training accuracy passes 99%', 'the rest of the letters; the note reads correctly', 'fb lb'),
+              ('after that', 'loss keeps falling, accuracy creeps toward 100%', 'the rare cases: digits, and where a phrase ends after a number', 'fg lg')]
     rows = ''.join(f'<div class="box {f}" style="font-weight:normal;text-align:left;padding:10px 14px;font-size:16px"><span class="n" style="font-size:15px">{a.upper()}</span><br><b>{b}</b><br><span class="k">learns: {c}</span></div>' for a, b, c, f in stages)
     return title('What to Expect') + f'''
 <div class="row" style="margin-bottom:14px">
- <div class="card" style="margin:0"><h3>Updates</h3><div class="m">900 phrases / 64 → 15 batches</div><div class="m">15 × 100 epochs = <b>1,500 updates</b></div></div>
- <div class="card" style="margin:0"><h3>Progress reports</h3><span class="code">train</span> prints four times (epochs 1, 26, 51 and 76), each with the network's current reading of the note. Exact numbers depend on the random starting weights.</div>
+ <div class="card" style="margin:0"><h3>Updates</h3><div class="m">2,000 phrases / 64 → 32 batches</div><div class="m">32 × 50 epochs = <b>1,600 updates</b></div></div>
+ <div class="card" style="margin:0"><h3>Progress reports</h3><span class="code">train</span> prints five times (epochs 1, 13, 25, 37 and 49), each with the network's current reading of the note. Exact numbers depend on the random starting weights.</div>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">{rows}</div>
-<div class="callout ly fy" style="margin-bottom:0;margin-top:14px"><b>Training accuracy isn't the whole story.</b> The supplied code also reports accuracy on the 150 validation phrases, which training never sees.</div>
+<div class="callout ly fy" style="margin-bottom:0;margin-top:14px"><b>Training accuracy isn't the whole story.</b> The supplied code also reports accuracy on the 200 validation phrases, which training never sees.</div>
 '''
 
 
@@ -212,7 +212,7 @@ def _():
 <table class="t"><tr><th>Step</th><th>PyTorch</th></tr>{body}</table>
 <div class="row">
  <div class="callout lb fb" style="margin:0"><b>The loss.</b> <span class="code">nn.CrossEntropyLoss</span> takes logits (it applies the softmax itself) and class <b>IDs</b>, one row per prediction: hence the flattening. <span class="code">ignore_index</span> set to the padding ID does exactly what your mask does.</div>
- <div class="callout ly fy" style="margin:0"><b>Adam, not plain gradient descent.</b> <span class="code">torch.optim.Adam</span> adapts the step size for every parameter, so learning rate 0.001 is enough. Your scratch network uses plain steps at 0.5.</div>
+ <div class="callout ly fy" style="margin:0"><b>Adam, not plain gradient descent.</b> <span class="code">torch.optim.Adam</span> adapts the step size for every parameter, so learning rate 0.001 is enough. Your scratch network uses plain steps at 2.0.</div>
 </div>
 <div class="callout lg fg" style="margin-bottom:0">Different optimizers and different starting weights, the same architecture: both should end up reading the note correctly.</div>
 '''
@@ -222,7 +222,7 @@ def _():
 @plate('plate_04-1a_two_accuracies')
 def _():
     return title('Opening the Test Set, Once') + f'''
-<p>Neither network has seen the 150 <b>test</b> phrases. Evaluate both on them, once, and then on the note.</p>
+<p>Neither network has seen the 200 <b>test</b> phrases. Evaluate both on them, once, and then on the note.</p>
 <div class="row" style="margin-bottom:12px">
  <div class="card" style="margin:0"><h3>Token accuracy</h3>fraction of real characters (including <span class="code">&lt;EOS&gt;</span>) predicted correctly: what <span class="code">get_accuracy</span> computes</div>
  <div class="card" style="margin:0"><h3>Exact-phrase accuracy</h3>fraction of phrases with <b>every</b> character correct</div>
@@ -273,11 +273,11 @@ SPEC = {'### Task 01-1: Description (0 pts.)': [(['(already applied: plates were
                                             'resulting gradient with the padded position zeroed.'),
                                            ('plate_02-1d_training_loop',
                                             'The training loop: forward as probabilities, loss and accuracy, backward, then update every '
-                                            'layer, with learning rate 0.5.')])],
+                                            'layer, with learning rate 2.0.')])],
  '### Task 03-1: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
                                           [('plate_03-1_what_to_expect',
-                                            'What training looks like: 15 batches per epoch for 1,500 updates; the loss starts near 3.7 '
-                                            'and training accuracy passes 99% by epoch 26.')])],
+                                            'What training looks like: 32 batches per epoch for 1,600 updates; the loss starts near 3.7 '
+                                            'and training accuracy passes 99% by epoch 13; digits and phrase endings come last.')])],
  '### Task 03-2: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
                                           [('plate_03-2_library_loop',
                                             'The same training loop in PyTorch: zero_grad, forward, flatten, CrossEntropyLoss with '

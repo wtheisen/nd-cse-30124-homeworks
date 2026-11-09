@@ -363,7 +363,7 @@ def _():
 # ---------------------------------------------------------------- Task 02-2
 @plate('plate_02-2b_from_pairs_to_batches')
 def _():
-    flow = chain([("<span class='code'>datasets['train']</span><small>900 (source, target) pairs</small>", 'fk lk'),
+    flow = chain([("<span class='code'>datasets['train']</span><small>2,000 (source, target) pairs</small>", 'fk lk'),
                   ('<span class="code">DataLoader</span><small>picks 64 pairs</small>', 'fb lb'),
                   ('<span class="code">dataset.collate</span><small>supplied</small>', 'fp lp'),
                   ('<span class="code">X, Y</span><small>(64, T) and (64, T, 41)</small>', 'fg lg')], size=16)
@@ -388,7 +388,7 @@ it receives the list of pairs for one batch and returns the batch tensors.</p>
 </div>
 <div class="row">
  <div class="callout lb fb" style="margin:0"><b><span class="m">T</span> changes from batch to batch.</b> Each batch is padded only to its own longest phrase, and the training loader shuffles the phrases every epoch.</div>
- <div class="callout lk fk" style="margin:0"><b>The last batch is smaller.</b> 900 pairs in batches of 64 is 14 full batches and one batch of 4. Nothing downstream should assume <span class="m">B = 64</span>.</div>
+ <div class="callout lk fk" style="margin:0"><b>The last batch is smaller.</b> 2,000 pairs in batches of 64 is 31 full batches and one batch of 16. Nothing downstream should assume <span class="m">B = 64</span>.</div>
 </div>
 '''
 
@@ -510,10 +510,10 @@ SPEC = {'### Task 01-1: Description (0 pts.)': [(['(already applied: plates were
                                             '40, 1, 0, 0, 0]] and targets [[12, 9, 16, 16, 19, 1], [37, 40, 1, 0, 0, 0]]. ROT13 keeps lengths equal, so '
                                             'positions align. Losses and accuracies ignore PAD positions.'),
                                            ('plate_02-2b_from_pairs_to_batches',
-                                            'From pairs to batches: the training Rot13Dataset holds 900 (source, target) pairs; the DataLoader picks 64 and '
+                                            'From pairs to batches: the training Rot13Dataset holds 2,000 (source, target) pairs; the DataLoader picks 64 and '
                                             'passes them to the supplied collate, which returns X of shape (64, T) and one-hot targets Y of shape (64, T, 41). '
                                             'zip(*batch) unzips the pairs; pad_sequence pads each group; F.one_hot turns the target IDs into one-hot vectors. '
-                                            'T changes from batch to batch, and the last batch has only 4 pairs.')])],
+                                            'T changes from batch to batch, and the last batch has only 16 pairs.')])],
  '### Task 03-2: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
                                           [('plate_03-1a_why_not_ids',
                                             'Why not feed the IDs directly: a linear layer treats an ID as an amount, so b (6) looks almost the same as a (5), '

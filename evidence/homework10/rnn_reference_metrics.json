@@ -1,10 +1,10 @@
 {
-  "source": "Executed HW09 scratch RNN (Spring 2026 HW05 classes, embed 32, hidden 64), final parameters after training. Same supplied dataset and splits as HW10.",
+  "source": "Executed HW09 scratch RNN (Spring 2026 HW05 classes, embed 32, hidden 64), final parameters after training on the seeded NLTK phrases. Same phrases as HW10.",
   "test": {
-    "loss": 0.00510962793776705,
-    "token_accuracy": 1.0,
-    "exact_sequence_accuracy": 1.0
+    "loss": 0.0039543420941997864,
+    "token_accuracy": 0.999654233455658,
+    "exact_sequence_accuracy": 0.9750000238418579
   },
-  "epochs": 100,
-  "learning_rate": 0.5
+  "epochs": 50,
+  "learning_rate": 2.0
 }
