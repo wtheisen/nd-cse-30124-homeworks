@@ -82,11 +82,11 @@ def _():
                   ('compare bags<small>with the note</small>', 'fp lp'),
                   ('score<small>BoW + BoC</small>', 'fg lg')], size=15)
     return title('Five Candidate Ciphers') + f'''
-<p>The cipher unit has five disguises on file for this kind of case, all from the <span class="code">pycipher</span> library. <span class="code">encipher</span> returns <b>capitals</b> and <b>drops</b> spaces, digits and punctuation.</p>
+<p>The cipher unit has five ciphers on file for this kind of case, all from the <span class="code">pycipher</span> library. <span class="code">encipher</span> returns <b>capitals</b> and <b>drops</b> spaces, digits and punctuation.</p>
 <table class="t" style="font-size:16px"><tr><th>Cipher</th><th>Rule</th><th><span class="code">hello</span> →</th><th>Letter counts</th></tr>{body}</table>
-<div class="card"><h3>The test: disguise a known English text with each candidate</h3>
+<div class="card"><h3>The test: encode a known English text with each candidate</h3>
 <div style="margin:6px 0 10px">{flow}</div>
-<span style="font-size:17px">Encode the sample with the <b>right</b> cipher and it gets the same renaming as the note: each letter's count lands on the same disguised letter (English's many <span class="code lit">e</span>s become <span class="code lit">r</span>s under ROT13, as in the note). A wrong cipher renames differently, so the character bags line up worse.</span></div>
+<span style="font-size:17px">Encode the sample with the <b>right</b> cipher and it gets the same renaming as the note: each letter's count lands on the same encoded letter (English's many <span class="code lit">e</span>s become <span class="code lit">r</span>s under ROT13, as in the note). A wrong cipher renames differently, so the character bags line up worse.</span></div>
 <div class="callout lr fr" style="margin-bottom:0"><b>The keys are fixed.</b> We test one shift, one Vigenère key, one affine rule and one scrambled alphabet. If the note used Caesar with shift 7, or a different scramble, none of these would match well. A low score rules out <b>this key</b>, not the whole family.</div>
 '''
 
@@ -350,7 +350,7 @@ def _():
  ‖<span class="b">a</span>‖ = √7, ‖<span class="r">b</span>‖ = √8<br>
  cos = 6 / √56 = <span class="g">0.802</span></div>
  <p style="font-size:16px;margin:8px 0 0" class="k">Missing items count as 0, so letters in only one word add nothing to the dot product.</p></div>
- <div class="card" style="margin:0"><h3><span class="code b">hello</span> and its disguise <span class="code r">uryyb</span></h3>
+ <div class="card" style="margin:0"><h3><span class="code b">hello</span> and its encoding <span class="code r">uryyb</span></h3>
  <p style="font-size:17px;margin-bottom:8px">ROT13 renames every letter, so the two words share <b>no</b> letters:</p>
  <div class="m" style="font-size:18px;margin-bottom:12px">letter-by-letter cosine = <span class="r">0</span></div>
  <p style="font-size:17px;margin-bottom:8px">Now forget <b>which</b> letter each count belongs to and sort the counts, largest first:</p>
@@ -495,7 +495,7 @@ SPEC = {'### Task 01-1: Description (0 pts.)': [(['(already applied: plates were
                                             'exactly 1. For counts, the cosine is between 0 and 1.'),
                                            ('plate_01-1b_comparing_bags',
                                             'Worked example: character bags of hello and yellow over e, h, l, o, w, y are [1,1,2,1,0,0] and [1,0,2,1,1,1]; dot '
-                                            'product 6, norms root 7 and root 8, cosine 6 over root 56 = 0.802. hello and its ROT13 disguise uryyb share no '
+                                            'product 6, norms root 7 and root 8, cosine 6 over root 56 = 0.802. hello and its ROT13 encoding uryyb share no '
                                             'letters, so their letter-by-letter cosine is 0, but their sorted counts are both [2,1,1,1], so the sorted-profile '
                                             'cosine is 1.'),
                                            ('plate_01-1c_five_candidate_ciphers',
