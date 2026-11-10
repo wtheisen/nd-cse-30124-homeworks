@@ -107,6 +107,33 @@ The output layer sends back <span class="code">d_outputs</span> <span class="m">
 
 
 # ---------------------------------------------------------------- Task 02-1
+@plate('plate_02-0_a_translation_task')
+def _():
+    def cells(chars, f):
+        return ''.join(f'<div class="box {f}" style="min-width:0;width:54px;padding:6px 0;font-family:Inc;font-size:19px;font-weight:normal">{c}</div>' for c in chars)
+    src = ['u', 'r', 'y', 'y', 'b', '␣', '6', '9', 'EOS']
+    tgt = ['h', 'e', 'l', 'l', 'o', '␣', '6', '9', 'EOS']
+    arrows = ''.join('<div style="width:54px;text-align:center;font-size:20px;color:#666">↓</div>' for _ in src)
+    grid = f'''<div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin:4px 0 14px">
+ <div style="display:flex;gap:6px;align-items:center"><span class="k" style="width:120px;text-align:right;font-size:16px">encoded (input)</span>{cells(src, 'fr lr')}</div>
+ <div style="display:flex;gap:6px;align-items:center"><span style="width:120px"></span>{arrows}</div>
+ <div style="display:flex;gap:6px;align-items:center"><span class="k" style="width:120px;text-align:right;font-size:16px">plain (target)</span>{cells(tgt, 'fg lg')}</div>
+</div>'''
+    return title('The Task: Translation, One Character at a Time') + f'''
+<p>Our network reads a whole encoded phrase and writes the decoded phrase, <b>one output character for every input character</b>. The two sequences line up position by position, so every position has its own answer:</p>
+{grid}
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+ <div class="card" style="margin:0"><h3>This task: aligned translation</h3>
+ <span style="font-size:16px">Input and target are the <b>same length</b>. The target at position <span class="m">t</span> is the plain character at position <span class="m">t</span>, and every real position is scored, <span class="code">&lt;EOS&gt;</span> included.</span></div>
+ <div class="card" style="margin:0"><h3>Not next-character prediction</h3>
+ <span style="font-size:16px">A language model (the kind behind ChatGPT) reads <span class="code">h e l l</span> and is scored on <span class="code">e l l o</span>: the target is the input <b>shifted by one</b>, a guess at what comes next.</span></div>
+ <div class="card" style="margin:0"><h3>Not general translation</h3>
+ <span style="font-size:16px"><span class="code">le chat noir</span> → <span class="code">the black cat</span>: the lengths can differ and the words reorder, so the model must read the whole sentence before writing (an encoder-decoder).</span></div>
+</div>
+<div class="callout lg fg" style="margin-bottom:0">Because the two sequences line up, the network can give its answer for position <span class="m">t</span> as soon as it has read position <span class="m">t</span>: <b>one forward pass, one prediction per position</b>, and the loss compares the two sequences position by position.</div>
+'''
+
+
 @plate('plate_02-1a_masked_loss')
 def _():
     return title('One Prediction per Position') + '''
