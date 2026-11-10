@@ -420,7 +420,7 @@ def _():
 # ---------------------------------------------------------------- Task 02-2
 @plate('plate_02-2b_from_pairs_to_batches')
 def _():
-    flow = chain([("<span class='code'>datasets['train']</span><small>2,000 (source, target) pairs</small>", 'fk lk'),
+    flow = chain([("<span class='code'>dataset</span><small>2,000 (source, target) pairs</small>", 'fk lk'),
                   ('<span class="code">DataLoader</span><small>picks 64 pairs</small>', 'fb lb'),
                   ('<span class="code">dataset.collate</span><small>supplied</small>', 'fp lp'),
                   ('<span class="code">X, Y</span><small>(64, T) and (64, T, 41)</small>', 'fg lg')], size=16)

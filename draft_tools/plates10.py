@@ -360,14 +360,13 @@ def _():
     return title("The Same Training Loop as HW09") + f'''
 <div class="flow" style="margin-bottom:14px">{cyc}</div>
 <div class="row" style="margin-bottom:12px">
- <div class="card" style="margin:0"><h3>Settings</h3><span class="m">25</span> epochs at learning rate <span class="m">0.4</span>. After each epoch, evaluate on validation and keep the parameters with the <b>lowest validation loss</b>.
- <p style="font-size:16px;color:#444;margin:8px 0 0">Accuracy saturates at 100% after a dozen epochs, so it can't break ties; loss keeps measuring how confident the correct predictions are.</p></div>
+ <div class="card" style="margin:0"><h3>Settings</h3><span class="m">25</span> epochs at learning rate <span class="m">0.4</span>. After each epoch, the supplied code prints the <b>mean training loss</b> over the 32 batches.
+ <p style="font-size:16px;color:#444;margin:8px 0 0">There is no validation set to watch. As in HW09, the real test is reading the note in Task 06.</p></div>
  <div class="card" style="margin:0"><h3>What should happen?</h3>Untrained, the loss starts near <span class="m">log 41 ≈ 3.71</span>. ROT13 is a simple, consistent mapping, so it should drop <b>well below 1</b> within five epochs.
  <p style="font-size:16px;margin:8px 0 0" class="r">Stalls near 3.7, or turns <span class="code">nan</span>? Recheck Tasks 01–03 before waiting out the run.</p></div>
 </div>
-<div class="callout ly fy"><b>Reading the attention.</b> The supplied plot shows both blocks' weights for one test phrase: row <span class="m">i</span> is output position <span class="m">i</span>, column <span class="m">j</span> is input position <span class="m">j</span>, darker means more weight.
+<div class="callout ly fy"><b>Reading the attention.</b> The supplied plot shows both blocks' weights for one phrase: row <span class="m">i</span> is output position <span class="m">i</span>, column <span class="m">j</span> is input position <span class="m">j</span>, darker means more weight.
 Each panel has its <b>own color scale</b>, and the printed largest and smallest weights next to uniform (<span class="m">1/T</span>) tell a real pattern from a nearly flat one.</div>
-<div class="callout lr fr" style="margin-bottom:0">The test set stays closed until Task 05.</div>
 '''
 
 
@@ -399,12 +398,13 @@ def _():
              ('Scratch encoder', 'yours, from Tasks 01–04', 'fy ly'),
              ('PyTorch encoder', 'Task 05-1\'s library build', 'fp lp')]
     html = ''.join(f'<div class="callout {c}" style="margin:0"><b>{n}</b><br><span style="font-size:16px">{d}</span></div>' for n, d, c in cards)
-    return title('Three Decoders, One Test Set') + f'''
-<p>Every model is now fixed. We open the <b>test set</b> once and evaluate all three:</p>
+    return title('Three Decoders, the Same Training Phrases') + f'''
+<p>Every model is now fixed. We score all three on the <b>2,000 training phrases</b>, which every one of them has seen:</p>
 <div class="row" style="margin-bottom:12px">{html}</div>
 <div class="callout lk fk"><b>Baseline: the direct ROT13 rule.</b> A fixed, known substitution gets every character right by construction.
 A learned model that only matches the rule has learned the rule, nothing more. The value of the learned decoders is what they teach us about sequence models, and that <b>two independent machines agree</b>.</div>
-<div class="callout lr fr" style="margin-bottom:0"><b>Exact-sequence accuracy</b> is the stricter number: one wrong character anywhere, or a misplaced end-of-sequence token, makes the whole phrase count as wrong.</div>
+<div class="callout lr fr" style="margin-bottom:0"><b>Exact-sequence accuracy</b> is the stricter number: one wrong character anywhere, or a misplaced end-of-sequence token, makes the whole phrase count as wrong.
+A high score on phrases a model trained on shows it learned the mapping. It doesn't show the model can read new text. That test is the note, in Task 06.</div>
 '''
 
 
@@ -464,15 +464,15 @@ SPEC = {
         ])],
     '### Task 04-1: Description': [
         (['The Same Training Loop as HW09', 'Worked Example: What Should Happen?', 'Reading the Attention'], [
-            ('plate_04-1_training_the_encoder', 'Training loop: forward, masked loss, backward, clipped SGD update. 25 epochs at learning rate 0.4, keeping the lowest validation loss. Loss starts near log 41 = 3.71 and should fall well below 1 within five epochs. The attention plot shows each block on its own color scale.'),
+            ('plate_04-1_training_the_encoder', 'Training loop: forward, masked loss, backward, clipped SGD update. 25 epochs at learning rate 0.4, printing the mean training loss. Loss starts near log 41 = 3.71 and should fall well below 1 within five epochs. The attention plot shows each block on its own color scale.'),
         ])],
     '### Task 05-1: Description': [
         (["PyTorch's Transformer Encoder"], [
             ('plate_05-1_pytorch_encoder', 'nn.TransformerEncoderLayer adds multiple heads, layer normalization, biases, FFN width 48 with ReLU, dropout 0. Use batch_first=True and src_key_padding_mask = (tokens == PAD). Trained with Adam at 0.003 for 15 epochs. Not a controlled comparison.'),
         ])],
     '### Task 05-2: Description': [
-        (['Three Decoders, One Test Set'], [
-            ('plate_05-2_three_decoders', 'Three decoders on the test set: the frozen HW09 RNN, the scratch encoder and the PyTorch encoder, with the direct ROT13 rule as a baseline. Exact-sequence accuracy counts a phrase wrong if any character is wrong.'),
+        (['Three Decoders, the Same Training Phrases'], [
+            ('plate_05-2_three_decoders', 'Three decoders scored on the training phrases: the frozen HW09 RNN, the scratch encoder and the PyTorch encoder, with the direct ROT13 rule as a baseline. Exact-sequence accuracy counts a phrase wrong if any character is wrong. Reading new text is tested by the note in Task 06.'),
         ])],
     '### Task 06-1: Description': [
         (['The Rule Itself', 'Worked Example'], [

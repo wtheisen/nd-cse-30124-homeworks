@@ -1,10 +1,11 @@
 {
   "source": "Executed HW09 scratch RNN (Spring 2026 HW05 classes, embed 32, hidden 64), final parameters after training on the seeded NLTK phrases. Same phrases as HW10.",
-  "test": {
-    "loss": 0.0039543420941997864,
-    "token_accuracy": 0.999654233455658,
-    "exact_sequence_accuracy": 0.9750000238418579
+  "train": {
+    "loss": 0.00338,
+    "token_accuracy": 0.99961,
+    "exact_sequence_accuracy": 0.974
   },
+  "note_characters_correct": "262 of 262",
   "epochs": 50,
   "learning_rate": 2.0
 }

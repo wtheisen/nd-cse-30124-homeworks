@@ -221,7 +221,7 @@ def _():
  <div class="card" style="margin:0"><h3>Progress reports</h3><span class="code">train</span> prints five times (epochs 1, 13, 25, 37 and 49), each with the network's current reading of the note. Exact numbers depend on the random starting weights.</div>
 </div>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">{rows}</div>
-<div class="callout ly fy" style="margin-bottom:0;margin-top:14px"><b>Training accuracy isn't the whole story.</b> The supplied code also reports accuracy on the 200 validation phrases, which training never sees.</div>
+<div class="callout ly fy" style="margin-bottom:0;margin-top:14px"><b>Watch the note.</b> Every progress report includes the network's reading of the note, which it never trains on. That reading is the real test.</div>
 '''
 
 
@@ -310,10 +310,7 @@ SPEC = {'### Task 01-1: Description (0 pts.)': [(['(already applied: plates were
                                             'The same training loop in PyTorch: zero_grad, forward, flatten, CrossEntropyLoss with '
                                             'ignore_index, backward, Adam step.')])],
  '### Task 04-1: Description (0 pts.)': [(['(already applied: plates were wired into the notebooks directly)'],
-                                          [('plate_04-1a_two_accuracies',
-                                            'Token accuracy versus exact-phrase accuracy: one wrong character in 30 is 97% by tokens but a '
-                                            'complete miss by phrases. Evaluate on the test set once.'),
-                                           ('plate_04-1b_how_the_network_reads',
+                                          [('plate_04-1b_how_the_network_reads',
                                             'Greedy decoding: encode the note, one forward pass, argmax at every position, stop at the '
                                             'first EOS; checked against codecs ROT13.')])]}
 
