@@ -331,6 +331,36 @@ def cells(vals, fills, w=46, size=18):
 
 
 # ---------------------------------------------------------------- Task 01-1
+@plate('plate_01-1d_bags_of_words_and_characters')
+def _():
+    def table(rows):
+        head = ''.join(f'<th style="text-align:center">{k}</th>' for k, _ in rows)
+        body = ''.join(f'<td class="m" style="text-align:center">{v}</td>' for _, v in rows)
+        return f'<table class="t" style="font-size:18px;margin:6px 0 10px"><tr>{head}</tr><tr>{body}</tr></table>'
+    bow = table([('<span class="code">the</span>', 2), ('<span class="code">cat</span>', 1), ('<span class="code">saw</span>', 1), ('<span class="code">dog</span>', 1)])
+    boc = table([(f'<span class="code lit">{c}</span>', n) for c, n in (('t', 2), ('h', 1), ('e', 1), ('c', 1), ('a', 1))])
+    return title('Two Bags: Words and Characters') + f'''
+<p>To compare two texts with numbers, first turn each one into a <b class="def">bag</b>: a table of how many times each item appears. The order of the items is thrown away; only the counts are kept.</p>
+<div class="row" style="margin-bottom:12px">
+ <div class="card" style="margin:0"><h3>Bag of words (BoW)</h3>
+ <span style="font-size:17px">Split on spaces and count each word. <span class="code b">the cat saw the dog</span>:</span>
+ {bow}
+ <span style="font-size:16px" class="k"><span class="code">the dog saw the cat</span> has exactly the same bag.</span>
+ <div class="code" style="font-size:16px;margin-top:10px">Counter(text.lower().split())</div></div>
+ <div class="card" style="margin:0"><h3>Bag of characters (BoC)</h3>
+ <span style="font-size:17px">Count each letter and digit; skip spaces and punctuation. <span class="code r">the cat</span>:</span>
+ {boc}
+ <span style="font-size:16px" class="k">The words are gone; only the letter counts are left.</span>
+ <div class="code" style="font-size:16px;margin-top:10px">Counter(ch for ch in text.lower() if ch.isalnum())</div></div>
+</div>
+<div class="row">
+ <div class="callout lb fb" style="margin:0"><b>What BoW can see in a cipher.</b> A word in the encoded sample matches a word in the note only if it was encoded <b>exactly</b> the same way, and only if the spaces survived the encoding.</div>
+ <div class="callout lr fr" style="margin:0"><b>What BoC can see.</b> A cipher that renames letters consistently moves each letter's count to a new letter. Encode the sample with the note's cipher, and its counts land on the same letters as the note's.</div>
+</div>
+<div class="callout lg fg" style="margin-bottom:0">To turn "how alike are these two bags?" into one number, we'll use <b>cosine similarity</b>.</div>
+'''
+
+
 @plate('plate_01-1b_comparing_bags')
 def _():
     letters = ['e', 'h', 'l', 'o', 'w', 'y']
@@ -493,6 +523,8 @@ SPEC = {'### Task 01-1: Description (0 pts.)': [(['(already applied: plates were
                                             'and root 20, cosine 1. a and c = [3, 1] are 45 degrees apart: 5 over root 50 = 0.707. [1, 0] and [0, 1] share '
                                             'nothing: cosine 0. hello and hellohello have counts [1, 1, 2, 1] and [2, 2, 4, 2], about 2.65 apart but cosine '
                                             'exactly 1. For counts, the cosine is between 0 and 1.'),
+                                           ('plate_01-1d_bags_of_words_and_characters',
+                                            "Two bags. A bag of words splits on spaces and counts each word: the cat saw the dog gives the 2, cat 1, saw 1, dog 1, the same bag as the dog saw the cat. A bag of characters counts each letter and digit and skips spaces and punctuation: the cat gives t 2, h 1, e 1, c 1, a 1. In a cipher, a word matches only if it was encoded exactly the same way and the spaces survived; a consistent letter renaming moves each letter's count to a new letter, so the sample encoded with the note's cipher has its counts on the same letters as the note. Cosine similarity turns the comparison into one number."),
                                            ('plate_01-1b_comparing_bags',
                                             'Worked example: character bags of hello and yellow over e, h, l, o, w, y are [1,1,2,1,0,0] and [1,0,2,1,1,1]; dot '
                                             'product 6, norms root 7 and root 8, cosine 6 over root 56 = 0.802. hello and its ROT13 encoding uryyb share no '
