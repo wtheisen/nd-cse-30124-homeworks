@@ -13,6 +13,47 @@ CODE_COLORS.update({'W': 'blue', 'U': 'blue', 'Wx': 'blue', 'Wc': 'blue', 'dWx':
 PLATES, plate = plate_registry()
 
 
+# ---------------------------------------------------------------- Task 00-1
+@plate('plate_00-1_padding_and_one_hot')
+def _():
+    V = 41
+
+    def ids(rows, lab):  # same cell style as HW08's plate_02-2a_padding
+        out = ''
+        for r in rows:
+            out += '<div style="display:flex">' + ''.join(
+                f'<span class="{"fk lk" if v == 0 else ("fr lr" if v == 1 else "fb lb")}" style="font-family:Inc;font-size:20px;width:52px;text-align:center;padding:6px 0;border:2px solid;margin:-1px 0 0 -2px;{"color:#999" if v == 0 else ""}">{v}</span>'
+                for v in r) + '</div>'
+        return f'<div style="text-align:center"><div class="lab" style="margin-bottom:6px">{lab}</div><div style="display:inline-block">{out}</div></div>'
+
+    def strip(hot):  # one 41-wide one-hot row, the 1 coloured green (or grey for padding)
+        f = 'fk lk' if hot == 0 else 'fg lg'
+        return '<div style="display:flex">' + ''.join(
+            f'<span class="{f if i == hot else ""}" style="display:inline-block;width:13px;height:22px;border:1px solid {"#BBB" if i != hot else "currentColor"};margin-left:-1px;'
+            f'font-family:Inc;font-size:11px;line-height:22px;text-align:center;{"color:#CCC" if i != hot else "font-weight:bold"}">{1 if i == hot else ""}</span>'
+            for i in range(V)) + '</div>'
+
+    tgt = [[12, 9, 16, 16, 19, 1], [37, 40, 1, 0, 0, 0]]
+    chars = [['h', 'e', 'l', 'l', 'o', '&lt;EOS&gt;'], ['6', '9', '&lt;EOS&gt;', '&lt;PAD&gt;', '&lt;PAD&gt;', '&lt;PAD&gt;']]
+    show = [(0, 0), (0, 4), (0, 5), (1, 3)]  # (phrase, position) rows drawn as one-hot strips
+    body = ''.join(
+        f'<tr><td class="code">Y[{b}, {t}]</td><td class="m" style="font-size:1em">{chars[b][t]}</td><td class="code"><b>{tgt[b][t]}</b></td><td>{strip(tgt[b][t])}</td></tr>'
+        for b, t in show)
+    return title('Padded Batches and One-Hot Targets') + f'''
+<p>Task 00's <span class="code">Rot13Dataset</span> hands every batch to the network as two tensors. The sources stay as padded IDs; the targets are padded the same way and then turned into <b class="def">one-hot</b> vectors over the 41-token vocabulary.</p>
+<div style="display:flex;justify-content:space-around;align-items:center;margin:6px 0 10px">
+ {ids(tgt, 'target IDs (2, 6)')}<span class="arr" style="font-size:30px">⇢</span>
+ <div class="card" style="margin:0;flex:0 0 auto;padding:10px 16px"><span class="code">F.one_hot(Y_idx, 41)</span><br><span class="k" style="font-size:15px">each ID becomes a row of 41 numbers</span></div>
+</div>
+<table class="t" style="font-size:16px;margin-bottom:6px"><tr><th>Entry</th><th>Token</th><th>ID</th><th>One-hot row: index 0 to 40, a single 1 at the ID</th></tr>{body}</table>
+<p style="font-size:16px;text-align:center;margin:0 0 12px" class="k">Same batch as HW08: (<span class="code">uryyb</span> → <span class="code">hello</span>) and (<span class="code">69</span> → <span class="code">69</span>). <span class="code">Y</span> holds all 12 rows: shape <span class="code">(2, 6, 41)</span>.</p>
+<div class="row">
+ <div class="callout lg fg" style="margin:0"><b>Lined up with the logits.</b> The network outputs <span class="code">(B, T, 41)</span>, one score per token at every position, so <span class="code">Y_hat</span> and <span class="code">Y</span> can be compared position by position. <span class="code">Y.argmax(dim=-1)</span> turns <span class="code">Y</span> back into IDs.</div>
+ <div class="callout lr fr" style="margin:0"><b>Padding still has a 1.</b> <span class="code">&lt;PAD&gt;</span> is ID 0, so its one-hot row has a 1 at index 0, not all zeros. The loss can't skip it just by looking at <span class="code">Y</span>: it needs a mask built from the padding ID (Task 02-1).</div>
+</div>
+'''
+
+
 # ---------------------------------------------------------------- Task 01-1
 @plate('plate_01-1_linear_3d')
 def _():
@@ -33,6 +74,69 @@ Every one of those <span class="m">B × T</span> rows is an ordinary example, so
 <span class="code">EmbeddingLayer</span> inherits <span class="code">backward</span>. Its cached input is one-hot, so <span class="m"><span class="o">dY_flat</span><sup>T</sup> @ <span class="r">X_flat</span></span> adds each position's gradient into the <b>column of the token that was there</b>:
 a token used three times gets three contributions, summed. Padding sits after every real character, so its column only ever receives zero.</div>
 <div class="callout lg fg" style="margin-bottom:0">Every gradient has the shape of the tensor it belongs to: check <span class="code">dW</span> against <span class="code">W</span>, <span class="code">db</span> against <span class="code">b</span>, <span class="code">dX</span> against <span class="code">X</span>.</div>
+'''
+
+
+# ---------------------------------------------------------------- Task 01-2
+@plate('plate_01-2a_where_tanh_sits')
+def _():
+    def box(txt, f, sub=''):
+        extra = 'background:#FCE5CD;border-color:#E69138;' if f == 'orange' else ''
+        return f'<div class="box {f}" style="min-width:0;padding:8px 14px;font-size:19px;{extra}">{txt}{f"<br><span class=\"k\" style=\"font-size:13px;font-weight:normal\">{sub}</span>" if sub else ""}</div>'
+    arr = '<span class="arr" style="font-size:26px;margin:0 8px">→</span>'
+    back = '<span class="arr" style="font-size:26px;margin:0 8px">←</span>'
+    return title('Where tanh Sits in the Recurrent Block') + f'''
+<p>Each step of HW08's <span class="code">RecurrentBlock.forward</span> is a weighted sum followed by tanh. tanh is its own small layer: it has a forward pass and a backward pass, but <b>no weights</b>.</p>
+<div style="display:flex;align-items:center;justify-content:center;margin:10px 0 4px">
+ {box('<span class="r">x<sub>t</sub></span>, <span class="y">c<sub>t−1</sub></span>', 'fk lk', 'inputs')}{arr}
+ {box('<span class="p">z<sub>t</sub></span>', 'fp lp', 'weighted sum')}{arr}
+ {box('tanh', 'fy ly', 'Tanh layer')}{arr}
+ {box('<span class="y">c<sub>t</sub></span>', 'fy ly', 'cached in HW08')}
+</div>
+<div style="display:flex;align-items:center;justify-content:center;margin:4px 0 14px">
+ {box('<span class="code">dz_at_timestep</span>', 'fg lg', 'to the weights')}{back}
+ {box('× slope', 'fy ly', '<span class="code">Tanh.backward</span>')}{back}
+ {box('<span class="code">dcurrent</span>', 'orange', 'gradient arriving')}
+</div>
+<div class="row">
+ <div class="card" style="margin:0"><h3>The slope, from the output</h3>
+ <div class="m" style="font-size:19px;line-height:1.9">tanh(z) = <span class="frac"><span>sinh z</span><span>cosh z</span></span>, so the quotient rule gives<br>
+ <span class="frac"><span>d<span class="y">c</span></span><span>d<span class="p">z</span></span></span> = <span class="frac"><span>cosh<sup>2</sup> z − sinh<sup>2</sup> z</span><span>cosh<sup>2</sup> z</span></span> = 1 − tanh<sup>2</sup> z = <b>1 − <span class="y">c</span><sup>2</sup></b></div></div>
+ <div class="callout ly fy" style="margin:0"><b>No need to keep <span class="p">z</span>.</b> The slope only needs <span class="y">c<sub>t</sub></span>, which HW08 already cached in <span class="code">hidden_states</span>. <span class="code">Tanh.backward</span> takes that output and returns <span class="m">1 − c<sup>2</sup></span>; <span class="code">RecurrentBlock.backward</span> does the multiplying.</div>
+</div>
+'''
+
+
+@plate('plate_01-2b_tanh_slope')
+def _():
+    X = lambda z: 40 + (z + 4) * 45
+    curve = ' '.join(f'{X(z):.1f},{110 - 80 * math.tanh(z):.1f}' for z in [x / 10 for x in range(-40, 41)])
+    slope = ' '.join(f'{X(z):.1f},{110 - 80 * (1 - math.tanh(z) ** 2):.1f}' for z in [x / 10 for x in range(-40, 41)])
+    svg = f'''<svg width="420" height="220" viewBox="0 0 420 220">
+ <line x1="40" y1="30" x2="400" y2="30" stroke="#999" stroke-dasharray="4 4"/><line x1="40" y1="190" x2="400" y2="190" stroke="#999" stroke-dasharray="4 4"/>
+ <line x1="40" y1="110" x2="400" y2="110" stroke="#000" stroke-width="1.5"/><line x1="220" y1="15" x2="220" y2="205" stroke="#000" stroke-width="1.5"/>
+ <polyline points="{slope}" fill="none" stroke="#6AA84F" stroke-width="4"/>
+ <polyline points="{curve}" fill="none" stroke="#DCB439" stroke-width="5"/>
+ <text x="404" y="34" font-family="Inc" font-size="15">1</text><text x="404" y="194" font-family="Inc" font-size="15">−1</text>
+ <text x="300" y="54" font-family="Arial" font-size="15" font-weight="bold" fill="#DCB439">c = tanh(z)</text>
+ <text x="232" y="22" font-family="Arial" font-size="15" font-weight="bold" fill="#6AA84F">slope 1 − c²</text>
+ <text x="396" y="128" font-family="Inc" font-size="15">z</text>
+</svg>'''
+    rows = ''
+    for z in (0, 1, 2, 3):
+        c = math.tanh(z)
+        rows += f'<tr><td class="code">{z}</td><td class="code y"><b>{c:.4f}</b></td><td class="code">1 − {c:.4f}<sup>2</sup></td><td class="code g"><b>{1 - c * c:.4f}</b></td></tr>'
+    assert f'{1 - math.tanh(1) ** 2:.2f}' == '0.42'
+    return title('Reading the Slope off the Output') + f'''
+<div class="row" style="align-items:center">
+ <div style="flex:1.1"><table class="t" style="font-size:17px;margin:0"><tr><th><span class="p">z</span></th><th><span class="y">c</span> = tanh(z)</th><th>1 − c<sup>2</sup></th><th>slope</th></tr>{rows}</table>
+ <p style="font-size:15px;margin:6px 0 0" class="k">Negative <span class="m">z</span> gives the same slopes: <span class="m">c<sup>2</sup></span> doesn't care about the sign.</p></div>
+ <div style="flex:0 0 420px">{svg}</div>
+</div>
+<div class="row">
+ <div class="card" style="margin:0"><h3>Element-wise</h3><span class="code">c_at_timestep</span> is <span class="code">(B, H)</span>, so the slope is <span class="code">(B, H)</span> too: one slope per phrase per hidden unit, multiplied <b>element-wise</b> with <span class="code">dcurrent</span>, not with <span class="code">@</span>.</div>
+ <div class="callout lr fr" style="margin:0"><b>Saturation.</b> When <span class="m">|c|</span> is near 1 the slope is near 0, and the gradient passing through barely survives. BPTT multiplies one of these slopes per step, which is why long phrases are hard for an RNN.</div>
+</div>
 '''
 
 
